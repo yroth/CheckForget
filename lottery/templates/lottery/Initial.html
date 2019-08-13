@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome to the Decision Making experiment!
+{% endblock %}
+
+{% block content %}
+
+    Please enter the following information.
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}
