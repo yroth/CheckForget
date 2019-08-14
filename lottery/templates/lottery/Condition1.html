@@ -12,10 +12,10 @@
     function acceptChoice() {
       next.disabled = false
       accept.disabled = true
-      const choice_0 = document.getElementById('id_choice_0')
-      const choice_1 = document.getElementById('id_choice_1')
-      choice_0.disabled = true
-      choice_1.disabled = true
+
+      $(':radio,:checkbox').click(function(){
+        return false
+      })
     }
   </script>
 {% endblock %}
