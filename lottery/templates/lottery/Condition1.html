@@ -7,8 +7,55 @@
 
 {% block content %}
 
+{% block scripts %}
+  <script>
+    function acceptChoice() {
+      next.disabled = false
+      accept.disabled = true
+      const choice_0 = document.getElementById('id_choice_0')
+      const choice_1 = document.getElementById('id_choice_1')
+      choice_0.disabled = true
+      choice_1.disabled = true
+    }
+  </script>
+{% endblock %}
+
+{% block styles %}
+  <style type="text/css">
+    .btn-accept {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      border: 1px solid #007bff;
+      color: #007bff;
+      background-color: #fff;
+    }
+
+    .btn-accept:hover:not(:disabled) {
+      color: #fff;
+      background-color: #007bff;
+      cursor: pointer;
+    }
+    .btn-accept:disabled {
+      color: #cbd6e1;
+      border-color: #cbd6e1;
+    }
+  </style>
+{% endblock %}
+
   {% formfields %}
 
-  {% next_button %}
+  <button id="accept" type="button" class="btn-accept" onclick="acceptChoice()">
+    Accept
+  </button>
+
+  <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
 
 {% endblock %}
