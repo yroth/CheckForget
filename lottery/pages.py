@@ -19,7 +19,7 @@ class Condition1(Page):
   form_fields = ['choice']
 
 page_sequence = [
-  # Initial,
+  Initial,
   Condition1,
   Results
 ]
