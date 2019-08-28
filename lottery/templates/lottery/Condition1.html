@@ -7,55 +7,139 @@
 
 {% block content %}
 
-{% block scripts %}
-  <script>
-    function acceptChoice() {
-      next.disabled = false
-      accept.disabled = true
+  {% block scripts %}
+    <script>
+      function acceptChoice() {
+        next.disabled = false
+        accept.disabled = true
+        check.disabled = true
 
-      $(':radio,:checkbox').click(function(){
-        return false
-      })
-    }
-  </script>
-{% endblock %}
+        $(':radio,:checkbox').click(function(){
+          return false
+        })
+      }
 
-{% block styles %}
-  <style type="text/css">
-    .btn-accept {
-      display: inline-block;
-      font-weight: 400;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      padding: .375rem .75rem;
-      font-size: 1rem;
-      line-height: 1.5;
-      border-radius: .25rem;
-      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-      border: 1px solid #007bff;
-      color: #007bff;
-      background-color: #fff;
-    }
+      function onCheck(event) {
+        const probTable = document.getElementById('prob-table')
+        probTable.classList.remove('hidden-table')
+        probTable.classList.add('displayed-table')
 
-    .btn-accept:hover:not(:disabled) {
-      color: #fff;
-      background-color: #007bff;
-      cursor: pointer;
-    }
-    .btn-accept:disabled {
-      color: #cbd6e1;
-      border-color: #cbd6e1;
-    }
-  </style>
-{% endblock %}
+        event.target.disabled = true
+      }
+    </script>
+  {% endblock %}
 
-  {% formfields %}
+  {% block styles %}
+    <style type="text/css">
+      .primary-btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        border: 1px solid #007bff;
+        color: #007bff;
+        background-color: #fff;
+      }
 
-  <button id="accept" type="button" class="btn-accept" onclick="acceptChoice()">
-    Accept
-  </button>
+      .primary-btn:hover:not(:disabled) {
+        color: #fff;
+        background-color: #007bff;
+        cursor: pointer;
+      }
+      .primary-btn:disabled {
+        color: #cbd6e1;
+        border-color: #cbd6e1;
+      }
 
-  <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
+      .displayed-table tbody {
+        opacity: 1;
+      }
+
+      .hidden-table tbody {
+        opacity: 0;
+      }
+      
+      table {
+        border-collapse: collapse;
+      }
+      td, th {
+        padding: 3px;
+        border: 1px solid black;
+      }
+
+      th {
+        text-align: center;
+      }
+
+    </style>
+  {% endblock %}
+
+    <table id="prob-table" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>
+              {{ player.realA1 }} with prob {{ player.probA1 }}
+            </td>
+            <td>
+              {{ player.realB1 }} with prob {{ player.probB1 }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ player.realA2 }} with prob {{ player.probA2 }}
+            </td>
+            <td>
+              {{ player.realB2 }} with prob {{ player.probB2 }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ player.realA3 }} with prob {{ player.probA3 }}
+            </td>
+            <td>
+              {{ player.realB3 }} with prob {{ player.probB3 }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ player.realA4 }} with prob {{ player.probA4 }}
+            </td>
+            <td>
+              {{ player.realB4 }} with prob {{ player.probB4 }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ player.realA5 }} with prob {{ player.probA5 }}
+            </td>
+            <td>
+              {{ player.realB5 }} with prob {{ player.probB5 }}
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    
+    {% formfields %}
+
+    <button id="accept" type="button" class="primary-btn btn-accept" onclick="acceptChoice()">
+      Accept
+    </button>
+    <button id="check" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+
+    <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
 
 {% endblock %}
