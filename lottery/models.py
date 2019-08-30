@@ -107,3 +107,9 @@ class Player(BasePlayer):
     realB4 = models.StringField()
     realB5 = models.StringField()
     
+    choose_better_strategy = models.StringField(
+        choices=['Always to click on "check"', 'Never to click on "check"'],
+        widget=widgets.RadioSelectHorizontal
+    )
+
+    best_strategy_opinion = models.StringField()
