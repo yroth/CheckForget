@@ -88,46 +88,20 @@
         </tr>
       </thead>
       <tbody>
-          <tr>
-            <td>
-              {{ player.realA1 }} with prob {{ player.probA1 }}
-            </td>
-            <td>
-              {{ player.realB1 }} with prob {{ player.probB1 }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {{ player.realA2 }} with prob {{ player.probA2 }}
-            </td>
-            <td>
-              {{ player.realB2 }} with prob {{ player.probB2 }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {{ player.realA3 }} with prob {{ player.probA3 }}
-            </td>
-            <td>
-              {{ player.realB3 }} with prob {{ player.probB3 }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {{ player.realA4 }} with prob {{ player.probA4 }}
-            </td>
-            <td>
-              {{ player.realB4 }} with prob {{ player.probB4 }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {{ player.realA5 }} with prob {{ player.probA5 }}
-            </td>
-            <td>
-              {{ player.realB5 }} with prob {{ player.probB5 }}
-            </td>
-          </tr>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1 player.realA2 player.realA3 player.realA4 player.realA5 as realA %}
+                {% cycle player.probA1 player.probA2 player.probA3 player.probA4 player.probA5 as probA %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1 player.realB2 player.realB3 player.realB4 player.realB5 as realB %}
+                {% cycle player.probB1 player.probB2 player.probB3 player.probB4 player.probB5 as probB %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
       </tbody>
     </table>
     
