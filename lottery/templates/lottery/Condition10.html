@@ -1,0 +1,10 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+  Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+  <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
+{% endblock %}
