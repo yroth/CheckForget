@@ -91,13 +91,13 @@
           {% for value in '12345'|make_list %}
             <tr>
               <td>
-                {% cycle player.realA1 player.realA2 player.realA3 player.realA4 player.realA5 as realA %}
-                {% cycle player.probA1 player.probA2 player.probA3 player.probA4 player.probA5 as probA %}
+                {% cycle player.realA1 player.realA2 player.realA3 player.realA4 player.realA5 as realA silent %}
+                {% cycle player.probA1 player.probA2 player.probA3 player.probA4 player.probA5 as probA silent %}
                 {{ realA }} with prob {{ probA }}
               </td>
               <td>
-                {% cycle player.realB1 player.realB2 player.realB3 player.realB4 player.realB5 as realB %}
-                {% cycle player.probB1 player.probB2 player.probB3 player.probB4 player.probB5 as probB %}
+                {% cycle player.realB1 player.realB2 player.realB3 player.realB4 player.realB5 as realB silent %}
+                {% cycle player.probB1 player.probB2 player.probB3 player.probB4 player.probB5 as probB silent %}
                 {{ realB }} with prob {{ probB }}
               </td>
             </tr>
