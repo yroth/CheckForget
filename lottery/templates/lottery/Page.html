@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block app_styles %}
+  <style type="text/css">
+    .primary-btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      border: 1px solid #007bff;
+      color: #007bff;
+      background-color: #fff;
+    }
+
+    .primary-btn:hover:not(:disabled) {
+      color: #fff;
+      background-color: #007bff;
+      cursor: pointer;
+    }
+    .primary-btn:disabled {
+      color: #cbd6e1;
+      border-color: #cbd6e1;
+    }
+
+    .displayed-table tbody {
+      opacity: 1;
+    }
+
+    .hidden-table tbody {
+      opacity: 0;
+    }
+    
+    table {
+      border-collapse: collapse;
+    }
+    td, th {
+      padding: 3px;
+      border: 1px solid black;
+    }
+
+    th {
+      text-align: center;
+    }
+
+  </style>
+{% endblock %}
+
+{% block app_scripts %}
+{% endblock %}
