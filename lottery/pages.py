@@ -12,10 +12,25 @@ class Initial(Page):
 class Condition1(Page):
   form_model = 'player'
   form_fields = ['choice']
+  def is_displayed(self):
+    return self.round_number <= (Constants.rows_per_condition)
 
 class Condition10(Page):
   form_model = 'player'
-  form_fields = ['choice']
+  form_fields = ['submitted_answer_1', 'submitted_answer_2', 'submitted_answer_3',\
+                  'submitted_answer_4', 'submitted_answer_5', 'submitted_answer_6',\
+                  'submitted_answer_7', 'submitted_answer_8', 'submitted_answer_9', 'submitted_answer_10']
+  def is_displayed(self):
+    return self.round_number > (Constants.rows_per_condition)
+  def vars_for_template(self):
+    return dict(
+      question_number = self.round_number - Constants.rows_per_condition,
+      total_questions_number = int(Constants.rows_per_condition / 10),
+    )
+
+class BetweenConditions(Page):
+  def is_displayed(self):
+    return self.round_number == (Constants.rows_per_condition + 1)
 
 class ShortQuestionnarie(Page):
   form_model = 'player'
@@ -31,7 +46,8 @@ class EndGame(Page):
 page_sequence = [
   Initial,
   Condition1,
-  # Condition10,
+  BetweenConditions,
+  Condition10,
   ShortQuestionnarie,
   EndGame
 ]

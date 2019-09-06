@@ -2,9 +2,516 @@
 {% load otree static %}
 
 {% block title %}
-  Question {{ player.round_number }} of {{ Constants.num_rounds }}
+  Question {{ question_number }} of {{ total_questions_number }}
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    let acceptedCounter = 0
+    const numberPattern = /\d+/g
+
+    function acceptChoice(event) {
+      event.target.disabled = true
+      event.target.nextElementSibling.disabled = true
+      
+      const integerPart = event.target.id.match(numberPattern)
+      const radioButtons = document.getElementsByName('submitted_answer_' + integerPart)
+      radioButtons.forEach((each) => {
+        $(each).on("click", function(e) {
+           e.preventDefault()
+          return false
+        })
+      })
+
+      acceptedCounter = acceptedCounter + 1
+      if (acceptedCounter === 10) {
+        next.disabled = false
+      }
+    }
+
+    function onCheck(event) {
+      const integerPart = event.target.id.match(numberPattern)
+      const probTable = document.getElementById('prob-table_' + integerPart)
+      probTable.classList.remove('hidden-table')
+      probTable.classList.add('displayed-table')
+
+      event.target.disabled = true
+    }
+  </script>
 {% endblock %}
 
 {% block content %}
-  <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
+  <div class="trial-block">
+    <h3>1 / 10</h3>
+    <table id="prob-table_1" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for value in '12345'|make_list %}
+          <tr>
+            <td>
+              {% cycle player.realA1_1 player.realA2_1 player.realA3_1 player.realA4_1 player.realA5_1 as realA silent %}
+              {% cycle player.probA1_1 player.probA2_1 player.probA3_1 player.probA4_1 player.probA5_1 as probA silent %}
+              {{ realA }} with prob {{ probA }}
+            </td>
+            <td>
+              {% cycle player.realB1_1 player.realB2_1 player.realB3_1 player.realB4_1 player.realB5_1 as realB silent %}
+              {% cycle player.probB1_1 player.probB2_1 player.probB3_1 player.probB4_1 player.probB5_1 as probB silent %}
+              {{ realB }} with prob {{ probB }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+      
+    <div class="controls  field-submitted_answer_1">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_1" value="A" required="" id="id_submitted_answer_1_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_1_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_1" value="B" required="" id="id_submitted_answer_1_1" class="form-check-input">
+        <label for="id_submitted_answer_1_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_1" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_1" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+
+  <div class="trial-block">
+    <h3>2 / 10</h3>
+    <table id="prob-table_2" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_2 player.realA2_2 player.realA3_2 player.realA4_2 player.realA5_2 as realA silent %}
+                {% cycle player.probA1_2 player.probA2_2 player.probA3_2 player.probA4_2 player.probA5_2 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_2 player.realB2_2 player.realB3_2 player.realB4_2 player.realB5_2 as realB silent %}
+                {% cycle player.probB1_2 player.probB2_2 player.probB3_2 player.probB4_2 player.probB5_2 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_2">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_2" value="A" required="" id="id_submitted_answer_2_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_2_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_2" value="B" required="" id="id_submitted_answer_2_1" class="form-check-input">
+        <label for="id_submitted_answer_2_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_2" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_2" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+  <div class="trial-block">
+    <h3>3 / 10</h3>
+    <table id="prob-table_3" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_3 player.realA2_3 player.realA3_3 player.realA4_3 player.realA5_3 as realA silent %}
+                {% cycle player.probA1_3 player.probA2_3 player.probA3_3 player.probA4_3 player.probA5_3 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_3 player.realB2_3 player.realB3_3 player.realB4_3 player.realB5_3 as realB silent %}
+                {% cycle player.probB1_3 player.probB2_3 player.probB3_3 player.probB4_3 player.probB5_3 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_3">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_3" value="A" required="" id="id_submitted_answer_3_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_3_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_3" value="B" required="" id="id_submitted_answer_3_1" class="form-check-input">
+        <label for="id_submitted_answer_3_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_3" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_3" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+  <div class="trial-block">
+    <h3>4 / 10</h3>
+    <table id="prob-table_4" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_4 player.realA2_4 player.realA3_4 player.realA4_4 player.realA5_4 as realA silent %}
+                {% cycle player.probA1_4 player.probA2_4 player.probA3_4 player.probA4_4 player.probA5_4 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_4 player.realB2_4 player.realB3_4 player.realB4_4 player.realB5_4 as realB silent %}
+                {% cycle player.probB1_4 player.probB2_4 player.probB3_4 player.probB4_4 player.probB5_4 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_4">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_4" value="A" required="" id="id_submitted_answer_4_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_4_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_4" value="B" required="" id="id_submitted_answer_4_1" class="form-check-input">
+        <label for="id_submitted_answer_4_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_4" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_4" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+  <div class="trial-block">
+    <h3>5 / 10</h3>
+    <table id="prob-table_5" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_5 player.realA2_5 player.realA3_5 player.realA4_5 player.realA5_5 as realA silent %}
+                {% cycle player.probA1_5 player.probA2_5 player.probA3_5 player.probA4_5 player.probA5_5 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_5 player.realB2_5 player.realB3_5 player.realB4_5 player.realB5_5 as realB silent %}
+                {% cycle player.probB1_5 player.probB2_5 player.probB3_5 player.probB4_5 player.probB5_5 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_5">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_5" value="A" required="" id="id_submitted_answer_5_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_5_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_5" value="B" required="" id="id_submitted_answer_5_1" class="form-check-input">
+        <label for="id_submitted_answer_5_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_5" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_5" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+  <div class="trial-block">
+    <h3>6 / 10</h3>
+    <table id="prob-table_6" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for value in '12345'|make_list %}
+          <tr>
+            <td>
+              {% cycle player.realA1_6 player.realA2_6 player.realA3_6 player.realA4_6 player.realA5_6 as realA silent %}
+              {% cycle player.probA1_6 player.probA2_6 player.probA3_6 player.probA4_6 player.probA5_6 as probA silent %}
+              {{ realA }} with prob {{ probA }}
+            </td>
+            <td>
+              {% cycle player.realB1_6 player.realB2_6 player.realB3_6 player.realB4_6 player.realB5_6 as realB silent %}
+              {% cycle player.probB1_6 player.probB2_6 player.probB3_6 player.probB4_6 player.probB5_6 as probB silent %}
+              {{ realB }} with prob {{ probB }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+      
+    <div class="controls  field-submitted_answer_6">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_6" value="A" required="" id="id_submitted_answer_6_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_6_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_6" value="B" required="" id="id_submitted_answer_6_1" class="form-check-input">
+        <label for="id_submitted_answer_6_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_6" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_6" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+
+  <div class="trial-block">
+    <h3>7 / 10</h3>
+    <table id="prob-table_7" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_7 player.realA2_7 player.realA3_7 player.realA4_7 player.realA5_7 as realA silent %}
+                {% cycle player.probA1_7 player.probA2_7 player.probA3_7 player.probA4_7 player.probA5_7 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_7 player.realB2_7 player.realB3_7 player.realB4_7 player.realB5_7 as realB silent %}
+                {% cycle player.probB1_7 player.probB2_7 player.probB3_7 player.probB4_7 player.probB5_7 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_7">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_7" value="A" required="" id="id_submitted_answer_7_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_7_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_7" value="B" required="" id="id_submitted_answer_7_1" class="form-check-input">
+        <label for="id_submitted_answer_7_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_7" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_7" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+  <div class="trial-block">
+    <h3>8 / 10</h3>
+    <table id="prob-table_8" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_8 player.realA2_8 player.realA3_8 player.realA4_8 player.realA5_8 as realA silent %}
+                {% cycle player.probA1_8 player.probA2_8 player.probA3_8 player.probA4_8 player.probA5_8 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_8 player.realB2_8 player.realB3_8 player.realB4_8 player.realB5_8 as realB silent %}
+                {% cycle player.probB1_8 player.probB2_8 player.probB3_8 player.probB4_8 player.probB5_8 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_8">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_8" value="A" required="" id="id_submitted_answer_8_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_8_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_8" value="B" required="" id="id_submitted_answer_8_1" class="form-check-input">
+        <label for="id_submitted_answer_8_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_8" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_8" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+  <div class="trial-block">
+    <h3>9 / 10</h3>
+    <table id="prob-table_9" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_9 player.realA2_9 player.realA3_9 player.realA4_9 player.realA5_9 as realA silent %}
+                {% cycle player.probA1_9 player.probA2_9 player.probA3_9 player.probA4_9 player.probA5_9 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_9 player.realB2_9 player.realB3_9 player.realB4_9 player.realB5_9 as realB silent %}
+                {% cycle player.probB1_9 player.probB2_9 player.probB3_9 player.probB4_9 player.probB5_9 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_9">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_9" value="A" required="" id="id_submitted_answer_9_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_9_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_9" value="B" required="" id="id_submitted_answer_9_1" class="form-check-input">
+        <label for="id_submitted_answer_9_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_9" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_9" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+  <div class="trial-block">
+    <h3>10 / 10</h3>
+    <table id="prob-table_10" class="prob-table hidden-table">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for value in '12345'|make_list %}
+            <tr>
+              <td>
+                {% cycle player.realA1_10 player.realA2_10 player.realA3_10 player.realA4_10 player.realA5_10 as realA silent %}
+                {% cycle player.probA1_10 player.probA2_10 player.probA3_10 player.probA4_10 player.probA5_10 as probA silent %}
+                {{ realA }} with prob {{ probA }}
+              </td>
+              <td>
+                {% cycle player.realB1_10 player.realB2_10 player.realB3_10 player.realB4_10 player.realB5_10 as realB silent %}
+                {% cycle player.probB1_10 player.probB2_10 player.probB3_10 player.probB4_10 player.probB5_10 as probB silent %}
+                {{ realB }} with prob {{ probB }}
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="controls  field-submitted_answer_10">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_10" value="A" required="" id="id_submitted_answer_10_0" checked="" class="form-check-input">
+        <label for="id_submitted_answer_10_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="submitted_answer_10" value="B" required="" id="id_submitted_answer_10_1" class="form-check-input">
+        <label for="id_submitted_answer_10_1" class="form-check-label">B</label>
+      </div>
+    </div>
+
+    <button id="accept_10" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
+      Accept
+    </button>
+    <button id="check_10" type="button" class="primary-btn btn-check" onclick="onCheck(event)">
+      Check
+    </button>
+  </div>
+
+    <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
 {% endblock %}
