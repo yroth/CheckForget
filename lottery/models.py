@@ -341,7 +341,6 @@ class Group(BaseGroup):
 def make_field():
     return models.StringField(
         choices=['A', 'B'],
-        initial='A',
         widget=widgets.RadioSelectHorizontal)
 
 

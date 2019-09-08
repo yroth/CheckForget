@@ -11,11 +11,17 @@
     const numberPattern = /\d+/g
 
     function acceptChoice(event) {
-      event.target.disabled = true
-      event.target.nextElementSibling.disabled = true
-      
       const integerPart = event.target.id.match(numberPattern)
       const radioButtons = document.getElementsByName('submitted_answer_' + integerPart)
+
+      if (!radioButtons[0].checked && !radioButtons[1].checked) {
+        alert('Make choice in task ' + integerPart + ' / 10')
+        return
+      }
+
+      event.target.disabled = true
+      event.target.nextElementSibling.disabled = true
+
       radioButtons.forEach((each) => {
         $(each).on("click", function(e) {
            e.preventDefault()
@@ -68,9 +74,9 @@
       </tbody>
     </table>
       
-    <div class="controls  field-submitted_answer_1">
+    <div class="controls  field-submitted_answer_1 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_1" value="A" required="" id="id_submitted_answer_1_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_1" value="A" required="" id="id_submitted_answer_1_0" class="form-check-input">
         <label for="id_submitted_answer_1_0" class="form-check-label">A</label>
       </div>
 
@@ -116,9 +122,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_2">
+    <div class="controls  field-submitted_answer_2 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_2" value="A" required="" id="id_submitted_answer_2_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_2" value="A" required="" id="id_submitted_answer_2_0" class="form-check-input">
         <label for="id_submitted_answer_2_0" class="form-check-label">A</label>
       </div>
 
@@ -163,9 +169,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_3">
+    <div class="controls  field-submitted_answer_3 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_3" value="A" required="" id="id_submitted_answer_3_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_3" value="A" required="" id="id_submitted_answer_3_0" class="form-check-input">
         <label for="id_submitted_answer_3_0" class="form-check-label">A</label>
       </div>
 
@@ -210,9 +216,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_4">
+    <div class="controls  field-submitted_answer_4 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_4" value="A" required="" id="id_submitted_answer_4_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_4" value="A" required="" id="id_submitted_answer_4_0" class="form-check-input">
         <label for="id_submitted_answer_4_0" class="form-check-label">A</label>
       </div>
 
@@ -257,9 +263,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_5">
+    <div class="controls  field-submitted_answer_5 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_5" value="A" required="" id="id_submitted_answer_5_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_5" value="A" required="" id="id_submitted_answer_5_0" class="form-check-input">
         <label for="id_submitted_answer_5_0" class="form-check-label">A</label>
       </div>
 
@@ -304,9 +310,9 @@
       </tbody>
     </table>
       
-    <div class="controls  field-submitted_answer_6">
+    <div class="controls  field-submitted_answer_6 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_6" value="A" required="" id="id_submitted_answer_6_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_6" value="A" required="" id="id_submitted_answer_6_0" class="form-check-input">
         <label for="id_submitted_answer_6_0" class="form-check-label">A</label>
       </div>
 
@@ -352,9 +358,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_7">
+    <div class="controls  field-submitted_answer_7 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_7" value="A" required="" id="id_submitted_answer_7_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_7" value="A" required="" id="id_submitted_answer_7_0" class="form-check-input">
         <label for="id_submitted_answer_7_0" class="form-check-label">A</label>
       </div>
 
@@ -399,9 +405,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_8">
+    <div class="controls  field-submitted_answer_8 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_8" value="A" required="" id="id_submitted_answer_8_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_8" value="A" required="" id="id_submitted_answer_8_0" class="form-check-input">
         <label for="id_submitted_answer_8_0" class="form-check-label">A</label>
       </div>
 
@@ -446,9 +452,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_9">
+    <div class="controls  field-submitted_answer_9 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_9" value="A" required="" id="id_submitted_answer_9_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_9" value="A" required="" id="id_submitted_answer_9_0" class="form-check-input">
         <label for="id_submitted_answer_9_0" class="form-check-label">A</label>
       </div>
 
@@ -493,9 +499,9 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_10">
+    <div class="controls  field-submitted_answer_1 radio-controls0">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_10" value="A" required="" id="id_submitted_answer_10_0" checked="" class="form-check-input">
+        <input type="radio" name="submitted_answer_10" value="A" required="" id="id_submitted_answer_10_0" class="form-check-input">
         <label for="id_submitted_answer_10_0" class="form-check-label">A</label>
       </div>
 
@@ -513,5 +519,5 @@
     </button>
   </div>
 
-    <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
+  <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
 {% endblock %}

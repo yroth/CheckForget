@@ -10,6 +10,10 @@
   {% block scripts %}
     <script>
       function acceptChoice() {
+        if (!document.getElementById('id_choice_0').checked && !document.getElementById('id_choice_1').checked) {
+          alert('Make choice')
+          return
+        }
         next.disabled = false
         accept.disabled = true
         check.disabled = true
@@ -25,6 +29,7 @@
         probTable.classList.add('displayed-table')
 
         event.target.disabled = true
+        
       }
     </script>
   {% endblock %}
@@ -54,7 +59,17 @@
       </tbody>
     </table>
     
-    {% formfields %}
+    <div class="controls  field-choice">
+      <div class="form-check form-check-inline">
+        <input type="radio" name="choice" value="A" required="" id="id_choice_0" class="form-check-input">
+        <label for="id_choice_0" class="form-check-label">A</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input type="radio" name="choice" value="B" required="" id="id_choice_1" class="form-check-input">
+        <label for="id_choice_1" class="form-check-label">B</label>
+      </div>
+    </div>
 
     <button id="accept" type="button" class="primary-btn btn-accept" onclick="acceptChoice()">
       Accept
