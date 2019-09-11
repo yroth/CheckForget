@@ -74,8 +74,6 @@ class Subsession(BaseSubsession):
             
             for p in self.session.get_participants():
                 lottery_number_cond_10 = p.vars['ind_cond_10'][first_lottery_ind_cond_10:first_lottery_ind_cond_10 + 10]
-                print('p', p)
-                print('lottery_number_cond_10', lottery_number_cond_10)
 
                 for k in lottery_number_cond_10:
                     current_lottery_cond_10 = self.session.vars['data'][k - 1]
