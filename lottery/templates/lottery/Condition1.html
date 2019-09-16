@@ -9,6 +9,17 @@
 
   {% block scripts %}
     <script>
+      var radioBtns = document.getElementsByName("choice")
+      var probTable = document.getElementById('prob-table')
+      var actionSeqDataField  = document.getElementById('id_actions_seq')
+      
+      radioBtns.forEach((el) => {
+        el.addEventListener('change', () => {
+          probTable.dataset.actionSequence = probTable.dataset.actionSequence + el.value
+          actionSeqDataField.value = actionSeqDataField.value + el.value
+        })
+      })
+      
       function acceptChoice() {
         if (!document.getElementById('id_choice_0').checked && !document.getElementById('id_choice_1').checked) {
           alert('Make choice')
@@ -24,17 +35,18 @@
       }
 
       function onCheck(event) {
-        const probTable = document.getElementById('prob-table')
         probTable.classList.remove('hidden-table')
         probTable.classList.add('displayed-table')
 
         event.target.disabled = true
-        
+
+        probTable.dataset.actionSequence = probTable.dataset.actionSequence + "C"
+        actionSeqDataField.value = actionSeqDataField.value + "C"
       }
     </script>
   {% endblock %}
 
-    <table id="prob-table" class="prob-table hidden-table">
+    <table id="prob-table" class="prob-table hidden-table" data-action-sequence="">
       <thead>
         <tr>
           <th>A</th>
@@ -59,7 +71,7 @@
       </tbody>
     </table>
     
-    <div class="controls  field-choice">
+    <div class="controls field-choice">
       <div class="form-check form-check-inline">
         <input type="radio" name="choice" value="A" required="" id="id_choice_0" class="form-check-input">
         <label for="id_choice_0" class="form-check-label">A</label>
@@ -69,6 +81,10 @@
         <input type="radio" name="choice" value="B" required="" id="id_choice_1" class="form-check-input">
         <label for="id_choice_1" class="form-check-label">B</label>
       </div>
+    </div>
+
+    <div id="action-seq" class="controls field-actions_seq hidden-seq-data">
+      <input name="actions_seq" required="" id="id_actions_seq" class="form-control">
     </div>
 
     <button id="accept" type="button" class="primary-btn btn-accept" onclick="acceptChoice()">

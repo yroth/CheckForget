@@ -11,7 +11,7 @@ class Initial(Page):
 
 class Condition1(Page):
   form_model = 'player'
-  form_fields = ['choice']
+  form_fields = ['choice', 'actions_seq']
   def is_displayed(self):
     return self.round_number <= (Constants.rows_per_condition)
 

@@ -352,6 +352,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal
     )
     choice = make_field()
+    actions_seq = models.StringField()
 
     submitted_answer_1 = make_field()
     submitted_answer_2 = make_field()
