@@ -15,7 +15,6 @@
       
       radioBtns.forEach((el) => {
         el.addEventListener('change', () => {
-          probTable.dataset.actionSequence = probTable.dataset.actionSequence + el.value
           actionSeqDataField.value = actionSeqDataField.value + el.value
         })
       })
@@ -40,13 +39,12 @@
 
         event.target.disabled = true
 
-        probTable.dataset.actionSequence = probTable.dataset.actionSequence + "C"
         actionSeqDataField.value = actionSeqDataField.value + "C"
       }
     </script>
   {% endblock %}
 
-    <table id="prob-table" class="prob-table hidden-table" data-action-sequence="">
+    <table id="prob-table" class="prob-table hidden-table">
       <thead>
         <tr>
           <th>A</th>

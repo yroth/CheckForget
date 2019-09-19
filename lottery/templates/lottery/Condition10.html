@@ -10,6 +10,15 @@
     let acceptedCounter = 0
     const numberPattern = /\d+/g
 
+    var radioBtns = document.getElementsByClassName('form-check-input')
+    Array.from(radioBtns).forEach((el) => {
+      el.addEventListener('change', (event) => {
+        const integerPart = event.target.name.match(numberPattern)
+        const actionSeqDataField  = document.getElementById('id_actions_seq_' + integerPart)
+        actionSeqDataField.value = actionSeqDataField.value + el.value
+      })
+    })
+
     function acceptChoice(event) {
       const integerPart = event.target.id.match(numberPattern)
       const radioButtons = document.getElementsByName('submitted_answer_' + integerPart)
@@ -38,10 +47,14 @@
     function onCheck(event) {
       const integerPart = event.target.id.match(numberPattern)
       const probTable = document.getElementById('prob-table_' + integerPart)
+      const actionSeqDataField  = document.getElementById('id_actions_seq_' + integerPart)
+
       probTable.classList.remove('hidden-table')
       probTable.classList.add('displayed-table')
 
       event.target.disabled = true
+
+      actionSeqDataField.value = actionSeqDataField.value + "C"
     }
   </script>
 {% endblock %}
@@ -84,6 +97,10 @@
         <input type="radio" name="submitted_answer_1" value="B" required="" id="id_submitted_answer_1_1" class="form-check-input">
         <label for="id_submitted_answer_1_1" class="form-check-label">B</label>
       </div>
+    </div>
+
+    <div id="actions-seq_1" class="controls field-actions_seq_1 hidden-seq-data">
+      <input name="actions_seq_1" required="" id="id_actions_seq_1" class="form-control">
     </div>
 
     <button id="accept_1" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -134,6 +151,10 @@
       </div>
     </div>
 
+    <div id="actions-seq_2" class="controls field-actions_seq_2 hidden-seq-data">
+      <input name="actions_seq_2" required="" id="id_actions_seq_2" class="form-control">
+    </div>
+
     <button id="accept_2" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -179,6 +200,10 @@
         <input type="radio" name="submitted_answer_3" value="B" required="" id="id_submitted_answer_3_1" class="form-check-input">
         <label for="id_submitted_answer_3_1" class="form-check-label">B</label>
       </div>
+    </div>
+
+    <div id="actions-seq_3" class="controls field-actions_seq_3 hidden-seq-data">
+      <input name="actions_seq_3" required="" id="id_actions_seq_3" class="form-control">
     </div>
 
     <button id="accept_3" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -228,6 +253,10 @@
       </div>
     </div>
 
+    <div id="actions-seq_4" class="controls field-actions_seq_4 hidden-seq-data">
+      <input name="actions_seq_4" required="" id="id_actions_seq_4" class="form-control">
+    </div>
+
     <button id="accept_4" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -275,6 +304,10 @@
       </div>
     </div>
 
+    <div id="actions-seq_5" class="controls field-actions_seq_5 hidden-seq-data">
+      <input name="actions_seq_5" required="" id="id_actions_seq_5" class="form-control">
+    </div>
+
     <button id="accept_5" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -320,6 +353,10 @@
         <input type="radio" name="submitted_answer_6" value="B" required="" id="id_submitted_answer_6_1" class="form-check-input">
         <label for="id_submitted_answer_6_1" class="form-check-label">B</label>
       </div>
+    </div>
+
+    <div id="actions-seq_6" class="controls field-actions_seq_6 hidden-seq-data">
+      <input name="actions_seq_6" required="" id="id_actions_seq_6" class="form-control">
     </div>
 
     <button id="accept_6" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -370,6 +407,10 @@
       </div>
     </div>
 
+    <div id="actions-seq_7" class="controls field-actions_seq_7 hidden-seq-data">
+      <input name="actions_seq_7" required="" id="id_actions_seq_7" class="form-control">
+    </div>
+
     <button id="accept_7" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -415,6 +456,10 @@
         <input type="radio" name="submitted_answer_8" value="B" required="" id="id_submitted_answer_8_1" class="form-check-input">
         <label for="id_submitted_answer_8_1" class="form-check-label">B</label>
       </div>
+    </div>
+
+    <div id="actions-seq_8" class="controls field-actions_seq_8 hidden-seq-data">
+      <input name="actions_seq_8" required="" id="id_actions_seq_8" class="form-control">
     </div>
 
     <button id="accept_8" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -464,6 +509,10 @@
       </div>
     </div>
 
+    <div id="actions-seq_9" class="controls field-actions_seq_9 hidden-seq-data">
+      <input name="actions_seq_9" required="" id="id_actions_seq_9" class="form-control">
+    </div>
+
     <button id="accept_9" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -499,7 +548,7 @@
       </tbody>
     </table>
     
-    <div class="controls  field-submitted_answer_1 radio-controls0">
+    <div class="controls  field-submitted_answer_10 radio-controls0">
       <div class="form-check form-check-inline">
         <input type="radio" name="submitted_answer_10" value="A" required="" id="id_submitted_answer_10_0" class="form-check-input">
         <label for="id_submitted_answer_10_0" class="form-check-label">A</label>
@@ -509,6 +558,10 @@
         <input type="radio" name="submitted_answer_10" value="B" required="" id="id_submitted_answer_10_1" class="form-check-input">
         <label for="id_submitted_answer_10_1" class="form-check-label">B</label>
       </div>
+    </div>
+
+    <div id="actions-seq_10" class="controls field-actions_seq_10 hidden-seq-data">
+      <input name="actions_seq_10" required="" id="id_actions_seq_10" class="form-control">
     </div>
 
     <button id="accept_10" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">

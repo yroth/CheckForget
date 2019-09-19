@@ -19,7 +19,10 @@ class Condition10(Page):
   form_model = 'player'
   form_fields = ['submitted_answer_1', 'submitted_answer_2', 'submitted_answer_3',\
                   'submitted_answer_4', 'submitted_answer_5', 'submitted_answer_6',\
-                  'submitted_answer_7', 'submitted_answer_8', 'submitted_answer_9', 'submitted_answer_10']
+                  'submitted_answer_7', 'submitted_answer_8', 'submitted_answer_9', 'submitted_answer_10',\
+                  'actions_seq_1', 'actions_seq_2', 'actions_seq_3',\
+                  'actions_seq_4', 'actions_seq_5', 'actions_seq_6',\
+                  'actions_seq_7', 'actions_seq_8', 'actions_seq_9', 'actions_seq_10']
   def is_displayed(self):
     return self.round_number > (Constants.rows_per_condition)
   def vars_for_template(self):

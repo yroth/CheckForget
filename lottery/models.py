@@ -365,6 +365,17 @@ class Player(BasePlayer):
     submitted_answer_9 = make_field()
     submitted_answer_10 = make_field()
 
+    actions_seq_1 = models.StringField()
+    actions_seq_2 = models.StringField()
+    actions_seq_3 = models.StringField()
+    actions_seq_4 = models.StringField()
+    actions_seq_5 = models.StringField()
+    actions_seq_6 = models.StringField()
+    actions_seq_7 = models.StringField()
+    actions_seq_8 = models.StringField()
+    actions_seq_9 = models.StringField()
+    actions_seq_10 = models.StringField()
+
     probA1 = models.StringField()
     probA2 = models.StringField()
     probA3 = models.StringField()
