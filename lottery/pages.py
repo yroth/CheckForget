@@ -14,6 +14,9 @@ class Condition1(Page):
   form_fields = ['choice', 'actions_seq']
   def is_displayed(self):
     return self.round_number <= (Constants.rows_per_condition)
+  def before_next_page(self):   
+    self.player.checked = 'C' in self.player.actions_seq
+    self.player.realization()
 
 class Condition10(Page):
   form_model = 'player'
@@ -40,10 +43,24 @@ class ShortQuestionnarie(Page):
   form_fields = ['best_strategy_opinion','choose_better_strategy']
   def is_displayed(self):
     return self.round_number == Constants.num_rounds
+  def before_next_page(self):
+    self.player.get_payoff(self.participant.vars['paying_round'])
 
 class EndGame(Page):
   def is_displayed(self):
     return self.round_number == Constants.num_rounds
+  def vars_for_template(self):
+    paying_round = self.participant.vars['paying_round']
+    player = self.player.in_round(paying_round)
+    choice = player.choice
+    real = player.real
+    checked = player.checked
+    return dict(
+      paying_round=paying_round,
+      choice=choice,
+      real=real,
+      checked=checked
+    )
 
 
 page_sequence = [

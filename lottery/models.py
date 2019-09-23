@@ -3,6 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 
+import numpy as np
 import csv
 import random
 
@@ -22,7 +23,7 @@ class Constants(BaseConstants):
         temp_arr_1 = [i for i in range(0,int(total_rows / 2))]
         temp_arr_10 = [i for i in range(int(total_rows / 2),total_rows)]
 
-    check_cost = c(5)
+    check_cost = 5
     rows_per_condition = int(total_rows / 2)
     num_rounds = int(total_rows / 2 + total_rows / 20)
 
@@ -34,7 +35,7 @@ class Subsession(BaseSubsession):
                 p.vars['ind_cond_1'] = random.sample(Constants.temp_arr_1, int(Constants.total_rows / 2))
                 p.vars['ind_cond_10'] = random.sample(Constants.temp_arr_10, int(Constants.total_rows / 2))
 
-                paying_round = random.randint(1, Constants.num_rounds)
+                paying_round = random.randint(1, Constants.rows_per_condition)
                 p.vars['paying_round'] = paying_round
 
         if self.round_number <= Constants.rows_per_condition:
@@ -340,10 +341,6 @@ class Subsession(BaseSubsession):
                 player.probB5_10 = p.vars['probB5_10']
                 player.realB5_10 = p.vars['realB5_10']
 
-        if self.round_number == Constants.num_rounds:
-            for player, p in zip(self.get_players(), self.session.get_participants()):
-                player.payoff = p.vars['paying_round']
-
 class Group(BaseGroup):
     pass
 
@@ -361,6 +358,26 @@ class Player(BasePlayer):
     )
     choice = make_field()
     actions_seq = models.StringField()
+    real = models.IntegerField()
+    checked = models.BooleanField(
+        initial=False
+    )
+
+    def realization(self):
+        if (self.choice == 'A'):
+            real_arr = [self.realA1, self.realA2, self.realA3, self.realA4, self.realA5]
+            prob_arr = [self.probA1, self.probA2, self.probA3, self.probA4, self.probA5]
+        else:
+            real_arr = [self.realB1, self.realB2, self.realB3, self.realB4, self.realB5]
+            prob_arr = [self.probB1, self.probB2, self.probB3, self.probB4, self.probB5]
+        self.real = np.random.choice(real_arr, 1, p=prob_arr)
+
+    def get_payoff(self, paying_round):
+        selected_player = self.in_round(paying_round)
+        if selected_player.checked:
+            self.payoff = c((selected_player.real - Constants.check_cost) * 0.01)
+        else: 
+            self.payoff = c(selected_player.real * 0.01)
 
     submitted_answer_1 = make_field()
     submitted_answer_2 = make_field()
