@@ -22,6 +22,7 @@ class Constants(BaseConstants):
         temp_arr_1 = [i for i in range(0,int(total_rows / 2))]
         temp_arr_10 = [i for i in range(int(total_rows / 2),total_rows)]
 
+    check_cost = c(5)
     rows_per_condition = int(total_rows / 2)
     num_rounds = int(total_rows / 2 + total_rows / 20)
 
@@ -32,6 +33,9 @@ class Subsession(BaseSubsession):
             for p in self.session.get_participants():
                 p.vars['ind_cond_1'] = random.sample(Constants.temp_arr_1, int(Constants.total_rows / 2))
                 p.vars['ind_cond_10'] = random.sample(Constants.temp_arr_10, int(Constants.total_rows / 2))
+
+                paying_round = random.randint(1, Constants.num_rounds)
+                p.vars['paying_round'] = paying_round
 
         if self.round_number <= Constants.rows_per_condition:
             for p in self.session.get_participants():
@@ -335,6 +339,10 @@ class Subsession(BaseSubsession):
                 player.realA5_10 = p.vars['realA5_10']
                 player.probB5_10 = p.vars['probB5_10']
                 player.realB5_10 = p.vars['realB5_10']
+
+        if self.round_number == Constants.num_rounds:
+            for player, p in zip(self.get_players(), self.session.get_participants()):
+                player.payoff = p.vars['paying_round']
 
 class Group(BaseGroup):
     pass
