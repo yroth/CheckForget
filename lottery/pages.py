@@ -9,6 +9,9 @@ class Initial(Page):
   form_model = 'player'
   form_fields = ['age', 'gender']
 
+class Instructions(Page):
+  def is_displayed(self):
+    return self.round_number == 1
 
 class Condition1(Page):
   form_model = 'player'
@@ -99,6 +102,7 @@ class EndGame(Page):
 
 page_sequence = [
   Initial,
+  Instructions,
   Condition1,
   BetweenConditions,
   Condition10,

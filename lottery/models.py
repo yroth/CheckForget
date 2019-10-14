@@ -49,29 +49,29 @@ class Subsession(BaseSubsession):
                     p.vars['realB' + str(i)] = p.vars['current_lottery_cond_1']['realB' + str(i)]
 
             for player, p in zip(self.get_players(), self.session.get_participants()):
-                player.probA1 = p.vars['probA1']
+                player.probA1 = '{:.2f}'.format(float(p.vars['probA1']))
                 player.realA1 = p.vars['realA1']
-                player.probB1 = p.vars['probB1']
+                player.probB1 = '{:.2f}'.format(float(p.vars['probB1']))
                 player.realB1 = p.vars['realB1']
 
-                player.probA2 = p.vars['probA2']
+                player.probA2 = '{:.2f}'.format(float(p.vars['probA2']))
                 player.realA2 = p.vars['realA2']
-                player.probB2 = p.vars['probB2']
+                player.probB2 = '{:.2f}'.format(float(p.vars['probB2']))
                 player.realB2 = p.vars['realB2']
 
-                player.probA3 = p.vars['probA3']
+                player.probA3 = '{:.2f}'.format(float(p.vars['probA3']))
                 player.realA3 = p.vars['realA3']
-                player.probB3 = p.vars['probB3']
+                player.probB3 = '{:.2f}'.format(float(p.vars['probB3']))
                 player.realB3 = p.vars['realB3']
 
-                player.probA4 = p.vars['probA4']
+                player.probA4 = '{:.2f}'.format(float(p.vars['probA4']))
                 player.realA4 = p.vars['realA4']
-                player.probB4 = p.vars['probB4']
+                player.probB4 = '{:.2f}'.format(float(p.vars['probB4']))
                 player.realB4 = p.vars['realB4']
 
-                player.probA5 = p.vars['probA5']
+                player.probA5 = '{:.2f}'.format(float(p.vars['probA5']))
                 player.realA5 = p.vars['realA5']
-                player.probB5 = p.vars['probB5']
+                player.probB5 = '{:.2f}'.format(float(p.vars['probB5']))
                 player.realB5 = p.vars['realB5']
 
         else:
@@ -91,254 +91,254 @@ class Subsession(BaseSubsession):
                         p.vars['realB' + suffix] = current_lottery_cond_10['realB' + str(i)]
 
             for player, p in zip(self.get_players(), self.session.get_participants()):
-                player.probA1_1 = p.vars['probA1_1']
+                player.probA1_1 = '{:.2f}'.format(float(p.vars['probA1_1']))
                 player.realA1_1 = p.vars['realA1_1']
-                player.probB1_1 = p.vars['probB1_1']
+                player.probB1_1 = '{:.2f}'.format(float(p.vars['probB1_1']))
                 player.realB1_1 = p.vars['realB1_1']
 
-                player.probA2_1 = p.vars['probA2_1']
+                player.probA2_1 = '{:.2f}'.format(float(p.vars['probA2_1']))
                 player.realA2_1 = p.vars['realA2_1']
-                player.probB2_1 = p.vars['probB2_1']
+                player.probB2_1 = '{:.2f}'.format(float(p.vars['probB2_1']))
                 player.realB2_1 = p.vars['realB2_1']
 
-                player.probA3_1 = p.vars['probA3_1']
+                player.probA3_1 = '{:.2f}'.format(float(p.vars['probA3_1']))
                 player.realA3_1 = p.vars['realA3_1']
-                player.probB3_1 = p.vars['probB3_1']
+                player.probB3_1 = '{:.2f}'.format(float(p.vars['probB3_1']))
                 player.realB3_1 = p.vars['realB3_1']
 
-                player.probA4_1 = p.vars['probA4_1']
+                player.probA4_1 = '{:.2f}'.format(float(p.vars['probA4_1']))
                 player.realA4_1 = p.vars['realA4_1']
-                player.probB4_1 = p.vars['probB4_1']
+                player.probB4_1 = '{:.2f}'.format(float(p.vars['probB4_1']))
                 player.realB4_1 = p.vars['realB4_1']
 
-                player.probA5_1 = p.vars['probA5_1']
+                player.probA5_1 = '{:.2f}'.format(float(p.vars['probA5_1']))
                 player.realA5_1 = p.vars['realA5_1']
-                player.probB5_1 = p.vars['probB5_1']
+                player.probB5_1 = '{:.2f}'.format(float(p.vars['probB5_1']))
                 player.realB5_1 = p.vars['realB5_1']
 
-                player.probA1_2 = p.vars['probA1_2']
+                player.probA1_2 = '{:.2f}'.format(float(p.vars['probA1_2']))
                 player.realA1_2 = p.vars['realA1_2']
-                player.probB1_2 = p.vars['probB1_2']
+                player.probB1_2 = '{:.2f}'.format(float(p.vars['probB1_2']))
                 player.realB1_2 = p.vars['realB1_2']
 
-                player.probA2_2 = p.vars['probA2_2']
+                player.probA2_2 = '{:.2f}'.format(float(p.vars['probA2_2']))
                 player.realA2_2 = p.vars['realA2_2']
-                player.probB2_2 = p.vars['probB2_2']
+                player.probB2_2 = '{:.2f}'.format(float(p.vars['probB2_2']))
                 player.realB2_2 = p.vars['realB2_2']
 
-                player.probA3_2 = p.vars['probA3_2']
+                player.probA3_2 = '{:.2f}'.format(float(p.vars['probA3_2']))
                 player.realA3_2 = p.vars['realA3_2']
-                player.probB3_2 = p.vars['probB3_2']
+                player.probB3_2 = '{:.2f}'.format(float(p.vars['probB3_2']))
                 player.realB3_2 = p.vars['realB3_2']
 
-                player.probA4_2 = p.vars['probA4_2']
+                player.probA4_2 = '{:.2f}'.format(float(p.vars['probA4_2']))
                 player.realA4_2 = p.vars['realA4_2']
-                player.probB4_2 = p.vars['probB4_2']
+                player.probB4_2 = '{:.2f}'.format(float(p.vars['probB4_2']))
                 player.realB4_2 = p.vars['realB4_2']
 
-                player.probA5_2 = p.vars['probA5_2']
+                player.probA5_2 = '{:.2f}'.format(float(p.vars['probA5_2']))
                 player.realA5_2 = p.vars['realA5_2']
-                player.probB5_2 = p.vars['probB5_2']
+                player.probB5_2 = '{:.2f}'.format(float(p.vars['probB5_2']))
                 player.realB5_2 = p.vars['realB5_2']
 
-                player.probA1_3 = p.vars['probA1_3']
+                player.probA1_3 = '{:.2f}'.format(float(p.vars['probA1_3']))
                 player.realA1_3 = p.vars['realA1_3']
-                player.probB1_3 = p.vars['probB1_3']
+                player.probB1_3 = '{:.2f}'.format(float(p.vars['probB1_3']))
                 player.realB1_3 = p.vars['realB1_3']
 
-                player.probA2_3 = p.vars['probA2_3']
+                player.probA2_3 = '{:.2f}'.format(float(p.vars['probA2_3']))
                 player.realA2_3 = p.vars['realA2_3']
-                player.probB2_3 = p.vars['probB2_3']
+                player.probB2_3 = '{:.2f}'.format(float(p.vars['probB2_3']))
                 player.realB2_3 = p.vars['realB2_3']
 
-                player.probA3_3 = p.vars['probA3_3']
+                player.probA3_3 = '{:.2f}'.format(float(p.vars['probA3_3']))
                 player.realA3_3 = p.vars['realA3_3']
-                player.probB3_3 = p.vars['probB3_3']
+                player.probB3_3 = '{:.2f}'.format(float(p.vars['probB3_3']))
                 player.realB3_3 = p.vars['realB3_3']
 
-                player.probA4_3 = p.vars['probA4_3']
+                player.probA4_3 = '{:.2f}'.format(float(p.vars['probA4_3']))
                 player.realA4_3 = p.vars['realA4_3']
-                player.probB4_3 = p.vars['probB4_3']
+                player.probB4_3 = '{:.2f}'.format(float(p.vars['probB4_3']))
                 player.realB4_3 = p.vars['realB4_3']
 
-                player.probA5_3 = p.vars['probA5_3']
+                player.probA5_3 = '{:.2f}'.format(float(p.vars['probA5_3']))
                 player.realA5_3 = p.vars['realA5_3']
-                player.probB5_3 = p.vars['probB5_3']
+                player.probB5_3 = '{:.2f}'.format(float(p.vars['probB5_3']))
                 player.realB5_3 = p.vars['realB5_3']
 
-                player.probA1_4 = p.vars['probA1_4']
+                player.probA1_4 = '{:.2f}'.format(float(p.vars['probA1_4']))
                 player.realA1_4 = p.vars['realA1_4']
-                player.probB1_4 = p.vars['probB1_4']
+                player.probB1_4 = '{:.2f}'.format(float(p.vars['probB1_4']))
                 player.realB1_4 = p.vars['realB1_4']
 
-                player.probA2_4 = p.vars['probA2_4']
+                player.probA2_4 = '{:.2f}'.format(float(p.vars['probA2_4']))
                 player.realA2_4 = p.vars['realA2_4']
-                player.probB2_4 = p.vars['probB2_4']
+                player.probB2_4 = '{:.2f}'.format(float(p.vars['probB2_4']))
                 player.realB2_4 = p.vars['realB2_4']
 
-                player.probA3_4 = p.vars['probA3_4']
+                player.probA3_4 = '{:.2f}'.format(float(p.vars['probA3_4']))
                 player.realA3_4 = p.vars['realA3_4']
-                player.probB3_4 = p.vars['probB3_4']
+                player.probB3_4 = '{:.2f}'.format(float(p.vars['probB3_4']))
                 player.realB3_4 = p.vars['realB3_4']
 
-                player.probA4_4 = p.vars['probA4_4']
+                player.probA4_4 = '{:.2f}'.format(float(p.vars['probA4_4']))
                 player.realA4_4 = p.vars['realA4_4']
-                player.probB4_4 = p.vars['probB4_4']
+                player.probB4_4 = '{:.2f}'.format(float(p.vars['probB4_4']))
                 player.realB4_4 = p.vars['realB4_4']
 
-                player.probA5_4 = p.vars['probA5_4']
+                player.probA5_4 = '{:.2f}'.format(float(p.vars['probA5_4']))
                 player.realA5_4 = p.vars['realA5_4']
-                player.probB5_4 = p.vars['probB5_4']
+                player.probB5_4 = '{:.2f}'.format(float(p.vars['probB5_4']))
                 player.realB5_4 = p.vars['realB5_4']
 
-                player.probA1_5 = p.vars['probA1_5']
+                player.probA1_5 = '{:.2f}'.format(float(p.vars['probA1_5']))
                 player.realA1_5 = p.vars['realA1_5']
-                player.probB1_5 = p.vars['probB1_5']
+                player.probB1_5 = '{:.2f}'.format(float(p.vars['probB1_5']))
                 player.realB1_5 = p.vars['realB1_5']
 
-                player.probA2_5 = p.vars['probA2_5']
+                player.probA2_5 = '{:.2f}'.format(float(p.vars['probA2_5']))
                 player.realA2_5 = p.vars['realA2_5']
-                player.probB2_5 = p.vars['probB2_5']
+                player.probB2_5 = '{:.2f}'.format(float(p.vars['probB2_5']))
                 player.realB2_5 = p.vars['realB2_5']
 
-                player.probA3_5 = p.vars['probA3_5']
+                player.probA3_5 = '{:.2f}'.format(float(p.vars['probA3_5']))
                 player.realA3_5 = p.vars['realA3_5']
-                player.probB3_5 = p.vars['probB3_5']
+                player.probB3_5 = '{:.2f}'.format(float(p.vars['probB3_5']))
                 player.realB3_5 = p.vars['realB3_5']
 
-                player.probA4_5 = p.vars['probA4_5']
+                player.probA4_5 = '{:.2f}'.format(float(p.vars['probA4_5']))
                 player.realA4_5 = p.vars['realA4_5']
-                player.probB4_5 = p.vars['probB4_5']
+                player.probB4_5 = '{:.2f}'.format(float(p.vars['probB4_5']))
                 player.realB4_5 = p.vars['realB4_5']
 
-                player.probA5_5 = p.vars['probA5_5']
+                player.probA5_5 = '{:.2f}'.format(float(p.vars['probA5_5']))
                 player.realA5_5 = p.vars['realA5_5']
-                player.probB5_5 = p.vars['probB5_5']
+                player.probB5_5 = '{:.2f}'.format(float(p.vars['probB5_5']))
                 player.realB5_5 = p.vars['realB5_5']
 
-                player.probA1_6 = p.vars['probA1_6']
+                player.probA1_6 = '{:.2f}'.format(float(p.vars['probA1_6']))
                 player.realA1_6 = p.vars['realA1_6']
-                player.probB1_6 = p.vars['probB1_6']
+                player.probB1_6 = '{:.2f}'.format(float(p.vars['probB1_6']))
                 player.realB1_6 = p.vars['realB1_6']
 
-                player.probA2_6 = p.vars['probA2_6']
+                player.probA2_6 = '{:.2f}'.format(float(p.vars['probA2_6']))
                 player.realA2_6 = p.vars['realA2_6']
-                player.probB2_6 = p.vars['probB2_6']
+                player.probB2_6 = '{:.2f}'.format(float(p.vars['probB2_6']))
                 player.realB2_6 = p.vars['realB2_6']
 
-                player.probA3_6 = p.vars['probA3_6']
+                player.probA3_6 = '{:.2f}'.format(float(p.vars['probA3_6']))
                 player.realA3_6 = p.vars['realA3_6']
-                player.probB3_6 = p.vars['probB3_6']
+                player.probB3_6 = '{:.2f}'.format(float(p.vars['probB3_6']))
                 player.realB3_6 = p.vars['realB3_6']
 
-                player.probA4_6 = p.vars['probA4_6']
+                player.probA4_6 = '{:.2f}'.format(float(p.vars['probA4_6']))
                 player.realA4_6 = p.vars['realA4_6']
-                player.probB4_6 = p.vars['probB4_6']
+                player.probB4_6 = '{:.2f}'.format(float(p.vars['probB4_6']))
                 player.realB4_6 = p.vars['realB4_6']
 
-                player.probA5_6 = p.vars['probA5_6']
+                player.probA5_6 = '{:.2f}'.format(float(p.vars['probA5_6']))
                 player.realA5_6 = p.vars['realA5_6']
-                player.probB5_6 = p.vars['probB5_6']
+                player.probB5_6 = '{:.2f}'.format(float(p.vars['probB5_6']))
                 player.realB5_6 = p.vars['realB5_6']
 
-                player.probA1_7 = p.vars['probA1_7']
+                player.probA1_7 = '{:.2f}'.format(float(p.vars['probA1_7']))
                 player.realA1_7 = p.vars['realA1_7']
-                player.probB1_7 = p.vars['probB1_7']
+                player.probB1_7 = '{:.2f}'.format(float(p.vars['probB1_7']))
                 player.realB1_7 = p.vars['realB1_7']
 
-                player.probA2_7 = p.vars['probA2_7']
+                player.probA2_7 = '{:.2f}'.format(float(p.vars['probA2_7']))
                 player.realA2_7 = p.vars['realA2_7']
-                player.probB2_7 = p.vars['probB2_7']
+                player.probB2_7 = '{:.2f}'.format(float(p.vars['probB2_7']))
                 player.realB2_7 = p.vars['realB2_7']
 
-                player.probA3_7 = p.vars['probA3_7']
+                player.probA3_7 = '{:.2f}'.format(float(p.vars['probA3_7']))
                 player.realA3_7 = p.vars['realA3_7']
-                player.probB3_7 = p.vars['probB3_7']
+                player.probB3_7 = '{:.2f}'.format(float(p.vars['probB3_7']))
                 player.realB3_7 = p.vars['realB3_7']
 
-                player.probA4_7 = p.vars['probA4_7']
+                player.probA4_7 = '{:.2f}'.format(float(p.vars['probA4_7']))
                 player.realA4_7 = p.vars['realA4_7']
-                player.probB4_7 = p.vars['probB4_7']
+                player.probB4_7 = '{:.2f}'.format(float(p.vars['probB4_7']))
                 player.realB4_7 = p.vars['realB4_7']
 
-                player.probA5_7 = p.vars['probA5_7']
+                player.probA5_7 = '{:.2f}'.format(float(p.vars['probA5_7']))
                 player.realA5_7 = p.vars['realA5_7']
-                player.probB5_7 = p.vars['probB5_7']
+                player.probB5_7 = '{:.2f}'.format(float(p.vars['probB5_7']))
                 player.realB5_7 = p.vars['realB5_7']
 
-                player.probA1_8 = p.vars['probA1_8']
+                player.probA1_8 = '{:.2f}'.format(float(p.vars['probA1_8']))
                 player.realA1_8 = p.vars['realA1_8']
-                player.probB1_8 = p.vars['probB1_8']
+                player.probB1_8 = '{:.2f}'.format(float(p.vars['probB1_8']))
                 player.realB1_8 = p.vars['realB1_8']
 
-                player.probA2_8 = p.vars['probA2_8']
+                player.probA2_8 = '{:.2f}'.format(float(p.vars['probA2_8']))
                 player.realA2_8 = p.vars['realA2_8']
-                player.probB2_8 = p.vars['probB2_8']
+                player.probB2_8 = '{:.2f}'.format(float(p.vars['probB2_8']))
                 player.realB2_8 = p.vars['realB2_8']
 
-                player.probA3_8 = p.vars['probA3_8']
+                player.probA3_8 = '{:.2f}'.format(float(p.vars['probA3_8']))
                 player.realA3_8 = p.vars['realA3_8']
-                player.probB3_8 = p.vars['probB3_8']
+                player.probB3_8 = '{:.2f}'.format(float(p.vars['probB3_8']))
                 player.realB3_8 = p.vars['realB3_8']
 
-                player.probA4_8 = p.vars['probA4_8']
+                player.probA4_8 = '{:.2f}'.format(float(p.vars['probA4_8']))
                 player.realA4_8 = p.vars['realA4_8']
-                player.probB4_8 = p.vars['probB4_8']
+                player.probB4_8 = '{:.2f}'.format(float(p.vars['probB4_8']))
                 player.realB4_8 = p.vars['realB4_8']
 
-                player.probA5_8 = p.vars['probA5_8']
+                player.probA5_8 = '{:.2f}'.format(float(p.vars['probA5_8']))
                 player.realA5_8 = p.vars['realA5_8']
-                player.probB5_8 = p.vars['probB5_8']
+                player.probB5_8 = '{:.2f}'.format(float(p.vars['probB5_8']))
                 player.realB5_8 = p.vars['realB5_8']
 
-                player.probA1_9 = p.vars['probA1_9']
+                player.probA1_9 = '{:.2f}'.format(float(p.vars['probA1_9']))
                 player.realA1_9 = p.vars['realA1_9']
-                player.probB1_9 = p.vars['probB1_9']
+                player.probB1_9 = '{:.2f}'.format(float(p.vars['probB1_9']))
                 player.realB1_9 = p.vars['realB1_9']
 
-                player.probA2_9 = p.vars['probA2_9']
+                player.probA2_9 = '{:.2f}'.format(float(p.vars['probA2_9']))
                 player.realA2_9 = p.vars['realA2_9']
-                player.probB2_9 = p.vars['probB2_9']
+                player.probB2_9 = '{:.2f}'.format(float(p.vars['probB2_9']))
                 player.realB2_9 = p.vars['realB2_9']
 
-                player.probA3_9 = p.vars['probA3_9']
+                player.probA3_9 = '{:.2f}'.format(float(p.vars['probA3_9']))
                 player.realA3_9 = p.vars['realA3_9']
-                player.probB3_9 = p.vars['probB3_9']
+                player.probB3_9 = '{:.2f}'.format(float(p.vars['probB3_9']))
                 player.realB3_9 = p.vars['realB3_9']
 
-                player.probA4_9 = p.vars['probA4_9']
+                player.probA4_9 = '{:.2f}'.format(float(p.vars['probA4_9']))
                 player.realA4_9 = p.vars['realA4_9']
-                player.probB4_9 = p.vars['probB4_9']
+                player.probB4_9 = '{:.2f}'.format(float(p.vars['probB4_9']))
                 player.realB4_9 = p.vars['realB4_9']
 
-                player.probA5_9 = p.vars['probA5_9']
+                player.probA5_9 = '{:.2f}'.format(float(p.vars['probA5_9']))
                 player.realA5_9 = p.vars['realA5_9']
-                player.probB5_9 = p.vars['probB5_9']
+                player.probB5_9 = '{:.2f}'.format(float(p.vars['probB5_9']))
                 player.realB5_9 = p.vars['realB5_9']
 
-                player.probA1_10 = p.vars['probA1_10']
+                player.probA1_10 = '{:.2f}'.format(float(p.vars['probA1_10']))
                 player.realA1_10 = p.vars['realA1_10']
-                player.probB1_10 = p.vars['probB1_10']
+                player.probB1_10 = '{:.2f}'.format(float(p.vars['probB1_10']))
                 player.realB1_10 = p.vars['realB1_10']
 
-                player.probA2_10 = p.vars['probA2_10']
+                player.probA2_10 = '{:.2f}'.format(float(p.vars['probA2_10']))
                 player.realA2_10 = p.vars['realA2_10']
-                player.probB2_10 = p.vars['probB2_10']
+                player.probB2_10 = '{:.2f}'.format(float(p.vars['probB2_10']))
                 player.realB2_10 = p.vars['realB2_10']
 
-                player.probA3_10 = p.vars['probA3_10']
+                player.probA3_10 = '{:.2f}'.format(float(p.vars['probA3_10']))
                 player.realA3_10 = p.vars['realA3_10']
-                player.probB3_10 = p.vars['probB3_10']
+                player.probB3_10 = '{:.2f}'.format(float(p.vars['probB3_10']))
                 player.realB3_10 = p.vars['realB3_10']
 
-                player.probA4_10 = p.vars['probA4_10']
+                player.probA4_10 = '{:.2f}'.format(float(p.vars['probA4_10']))
                 player.realA4_10 = p.vars['realA4_10']
-                player.probB4_10 = p.vars['probB4_10']
+                player.probB4_10 = '{:.2f}'.format(float(p.vars['probB4_10']))
                 player.realB4_10 = p.vars['realB4_10']
 
-                player.probA5_10 = p.vars['probA5_10']
+                player.probA5_10 = '{:.2f}'.format(float(p.vars['probA5_10']))
                 player.realA5_10 = p.vars['realA5_10']
-                player.probB5_10 = p.vars['probB5_10']
+                player.probB5_10 = '{:.2f}'.format(float(p.vars['probB5_10']))
                 player.realB5_10 = p.vars['realB5_10']
 
 class Group(BaseGroup):
@@ -353,7 +353,7 @@ def make_field():
 class Player(BasePlayer):
     age = models.IntegerField()
     gender = models.StringField(
-        choices=['male', 'female'],
+        choices=['Male', 'Female'],
         widget=widgets.RadioSelectHorizontal
     )
     choice = make_field()
