@@ -14,6 +14,9 @@
       var actionSeqDataField  = document.getElementById('id_actions_seq')
       
       radioBtns.forEach((el) => {
+        if (el.checked) {
+          actionSeqDataField.value = actionSeqDataField.value + el.value
+        }
         el.addEventListener('change', () => {
           actionSeqDataField.value = actionSeqDataField.value + el.value
         })
@@ -71,12 +74,20 @@
     
     <div class="controls field-choice">
       <div class="form-check form-check-inline">
-        <input type="radio" name="choice" value="A" required="" id="id_choice_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice == 'A' %}
+          <input type="radio" name="choice" value="A" checked required="" id="id_choice_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="choice" value="A" required="" id="id_choice_0" class="form-check-input">
+        {% endif %}
         <label for="id_choice_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="choice" value="B" required="" id="id_choice_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice == 'B' %}
+          <input type="radio" name="choice" value="B" checked required="" id="id_choice_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="choice" value="B" required="" id="id_choice_1" class="form-check-input">
+        {% endif %}
         <label for="id_choice_1" class="form-check-label">B</label>
       </div>
     </div>

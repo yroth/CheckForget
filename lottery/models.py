@@ -24,6 +24,11 @@ class Constants(BaseConstants):
         temp_arr_10 = [i for i in range(int(total_rows / 2),total_rows)]
 
     check_cost = 5
+   
+    # initial choice could be 'A' or 'B'
+    # to disable static initial choice, set it to empty string
+    initial_choice = ''
+
     rows_per_condition = int(total_rows / 2)
     num_rounds = int(total_rows / 2 + total_rows / 20)
 
@@ -47,6 +52,11 @@ class Subsession(BaseSubsession):
                     p.vars['realA' + str(i)] = p.vars['current_lottery_cond_1']['realA' + str(i)]
                     p.vars['probB' + str(i)] = p.vars['current_lottery_cond_1']['probB' + str(i)]
                     p.vars['realB' + str(i)] = p.vars['current_lottery_cond_1']['realB' + str(i)]
+
+            # random initial choice for condition-1
+            # to enable it, uncomment next two lines 
+            # for player in self.get_players():
+            #     player.initial_choice = random.choice(['A', 'B'])
 
             for player, p in zip(self.get_players(), self.session.get_participants()):
                 player.probA1 = '{:.2f}'.format(float(p.vars['probA1']))
@@ -89,6 +99,20 @@ class Subsession(BaseSubsession):
                         p.vars['realA' + suffix] = current_lottery_cond_10['realA' + str(i)]
                         p.vars['probB' + suffix] = current_lottery_cond_10['probB' + str(i)]
                         p.vars['realB' + suffix] = current_lottery_cond_10['realB' + str(i)]
+
+            # random initial choice for condition-10
+            # to enable it, uncomment next 11 lines 
+            # for player in self.get_players():
+            #         player.initial_choice_1 = random.choice(['A', 'B'])
+            #         player.initial_choice_2 = random.choice(['A', 'B'])
+            #         player.initial_choice_3 = random.choice(['A', 'B'])
+            #         player.initial_choice_4 = random.choice(['A', 'B'])
+            #         player.initial_choice_5 = random.choice(['A', 'B'])
+            #         player.initial_choice_6 = random.choice(['A', 'B'])
+            #         player.initial_choice_7 = random.choice(['A', 'B'])
+            #         player.initial_choice_8 = random.choice(['A', 'B'])
+            #         player.initial_choice_9 = random.choice(['A', 'B'])
+            #         player.initial_choice_10 = random.choice(['A', 'B'])
 
             for player, p in zip(self.get_players(), self.session.get_participants()):
                 player.probA1_1 = '{:.2f}'.format(float(p.vars['probA1_1']))
@@ -356,6 +380,7 @@ class Player(BasePlayer):
         choices=['Male', 'Female'],
         widget=widgets.RadioSelectHorizontal
     )
+    initial_choice = models.StringField()
     choice = make_field()
     actions_seq = models.StringField()
     real = models.IntegerField()
@@ -446,6 +471,17 @@ class Player(BasePlayer):
     realB3 = models.StringField()
     realB4 = models.StringField()
     realB5 = models.StringField()
+
+    initial_choice_1 = models.StringField()
+    initial_choice_2 = models.StringField()
+    initial_choice_3 = models.StringField()
+    initial_choice_4 = models.StringField()
+    initial_choice_5 = models.StringField()
+    initial_choice_6 = models.StringField()
+    initial_choice_7 = models.StringField()
+    initial_choice_8 = models.StringField()
+    initial_choice_9 = models.StringField()
+    initial_choice_10 = models.StringField()
     
     choose_better_strategy = models.StringField(
         choices=['Always to click on "check"', 'Never to click on "check"'],

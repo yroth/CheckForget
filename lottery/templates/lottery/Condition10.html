@@ -12,6 +12,12 @@
 
     var radioBtns = document.getElementsByClassName('form-check-input')
     Array.from(radioBtns).forEach((el) => {
+      const initialIntegerPart = el.name.match(numberPattern)
+      const initialActionSeqDataField  = document.getElementById('id_actions_seq_' + initialIntegerPart)
+      if (el.checked) {
+        initialActionSeqDataField.value = initialActionSeqDataField.value + el.value
+      }
+
       el.addEventListener('change', (event) => {
         const integerPart = event.target.name.match(numberPattern)
         const actionSeqDataField  = document.getElementById('id_actions_seq_' + integerPart)
@@ -89,12 +95,21 @@
       
     <div class="controls  field-submitted_answer_1 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_1" value="A" required="" id="id_submitted_answer_1_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_1 == 'A' %}
+          <input type="radio" name="submitted_answer_1" value="A" checked required="" id="id_submitted_answer_1_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_1" value="A" required="" id="id_submitted_answer_1_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_1_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_1" value="B" required="" id="id_submitted_answer_1_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_1 == 'B' %}
+          <input type="radio" name="submitted_answer_1" value="B" checked required="" id="id_submitted_answer_1_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_1" value="B" required="" id="id_submitted_answer_1_1" class="form-check-input">
+        {% endif %}
+
         <label for="id_submitted_answer_1_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -141,12 +156,20 @@
     
     <div class="controls  field-submitted_answer_2 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_2" value="A" required="" id="id_submitted_answer_2_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_2 == 'A' %}
+          <input type="radio" name="submitted_answer_2" value="A" checked required="" id="id_submitted_answer_2_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_2" value="A" required="" id="id_submitted_answer_2_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_2_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_2" value="B" required="" id="id_submitted_answer_2_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_2 == 'B' %}
+          <input type="radio" name="submitted_answer_2" value="B" checked required="" id="id_submitted_answer_2_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_2" value="B" required="" id="id_submitted_answer_2_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_2_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -192,12 +215,20 @@
     
     <div class="controls  field-submitted_answer_3 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_3" value="A" required="" id="id_submitted_answer_3_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_3 == 'A' %}
+          <input type="radio" name="submitted_answer_3" value="A" checked required="" id="id_submitted_answer_3_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_3" value="A" required="" id="id_submitted_answer_3_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_3_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_3" value="B" required="" id="id_submitted_answer_3_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_3 == 'B' %}
+          <input type="radio" name="submitted_answer_3" value="B" checked required="" id="id_submitted_answer_3_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_3" value="B" required="" id="id_submitted_answer_3_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_3_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -243,12 +274,20 @@
     
     <div class="controls  field-submitted_answer_4 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_4" value="A" required="" id="id_submitted_answer_4_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_4 == 'A' %}
+          <input type="radio" name="submitted_answer_4" value="A" checked required="" id="id_submitted_answer_4_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_4" value="A" required="" id="id_submitted_answer_4_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_4_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_4" value="B" required="" id="id_submitted_answer_4_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_4 == 'B' %}
+          <input type="radio" name="submitted_answer_4" value="B" checked required="" id="id_submitted_answer_4_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_4" value="B" required="" id="id_submitted_answer_4_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_4_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -294,12 +333,20 @@
     
     <div class="controls  field-submitted_answer_5 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_5" value="A" required="" id="id_submitted_answer_5_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_5 == 'A' %}
+          <input type="radio" name="submitted_answer_5" value="A" checked required="" id="id_submitted_answer_5_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_5" value="A" required="" id="id_submitted_answer_5_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_5_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_5" value="B" required="" id="id_submitted_answer_5_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_5 == 'B' %}
+          <input type="radio" name="submitted_answer_5" value="B" checked required="" id="id_submitted_answer_5_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_5" value="B" required="" id="id_submitted_answer_5_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_5_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -345,12 +392,20 @@
       
     <div class="controls  field-submitted_answer_6 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_6" value="A" required="" id="id_submitted_answer_6_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_6 == 'A' %}
+          <input type="radio" name="submitted_answer_6" value="A" checked required="" id="id_submitted_answer_6_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_6" value="A" required="" id="id_submitted_answer_6_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_6_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_6" value="B" required="" id="id_submitted_answer_6_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_6 == 'B' %}
+          <input type="radio" name="submitted_answer_6" value="B" checked required="" id="id_submitted_answer_6_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_6" value="B" required="" id="id_submitted_answer_6_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_6_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -397,12 +452,20 @@
     
     <div class="controls  field-submitted_answer_7 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_7" value="A" required="" id="id_submitted_answer_7_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_7 == 'A' %}
+          <input type="radio" name="submitted_answer_7" value="A" checked required="" id="id_submitted_answer_7_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_7" value="A" required="" id="id_submitted_answer_7_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_7_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_7" value="B" required="" id="id_submitted_answer_7_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_7 == 'B' %}
+          <input type="radio" name="submitted_answer_7" value="B" checked required="" id="id_submitted_answer_7_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_7" value="B" required="" id="id_submitted_answer_7_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_7_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -448,12 +511,20 @@
     
     <div class="controls  field-submitted_answer_8 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_8" value="A" required="" id="id_submitted_answer_8_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_8 == 'A' %}
+          <input type="radio" name="submitted_answer_8" value="A" checked required="" id="id_submitted_answer_8_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_8" value="A" required="" id="id_submitted_answer_8_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_8_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_8" value="B" required="" id="id_submitted_answer_8_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_8 == 'B' %}
+          <input type="radio" name="submitted_answer_8" value="B" checked required="" id="id_submitted_answer_8_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_8" value="B" required="" id="id_submitted_answer_8_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_8_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -499,12 +570,20 @@
     
     <div class="controls  field-submitted_answer_9 radio-controls">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_9" value="A" required="" id="id_submitted_answer_9_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_9 == 'A' %}
+          <input type="radio" name="submitted_answer_9" value="A" checked required="" id="id_submitted_answer_9_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_9" value="A" required="" id="id_submitted_answer_9_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_9_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_9" value="B" required="" id="id_submitted_answer_9_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_9 == 'B' %}
+          <input type="radio" name="submitted_answer_9" value="B" checked required="" id="id_submitted_answer_9_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_9" value="B" required="" id="id_submitted_answer_9_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_9_1" class="form-check-label">B</label>
       </div>
     </div>
@@ -550,12 +629,20 @@
     
     <div class="controls  field-submitted_answer_10 radio-controls0">
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_10" value="A" required="" id="id_submitted_answer_10_0" class="form-check-input">
+        {% if Constants.initial_choice == 'A' or player.initial_choice_10 == 'A' %}
+          <input type="radio" name="submitted_answer_10" value="A" checked required="" id="id_submitted_answer_10_0" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_10" value="A" required="" id="id_submitted_answer_10_0" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_10_0" class="form-check-label">A</label>
       </div>
 
       <div class="form-check form-check-inline">
-        <input type="radio" name="submitted_answer_10" value="B" required="" id="id_submitted_answer_10_1" class="form-check-input">
+        {% if Constants.initial_choice == 'B' or player.initial_choice_10 == 'B' %}
+          <input type="radio" name="submitted_answer_10" value="B" checked required="" id="id_submitted_answer_10_1" class="form-check-input">
+        {% else %}
+          <input type="radio" name="submitted_answer_10" value="B" required="" id="id_submitted_answer_10_1" class="form-check-input">
+        {% endif %}
         <label for="id_submitted_answer_10_1" class="form-check-label">B</label>
       </div>
     </div>
