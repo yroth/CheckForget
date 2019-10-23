@@ -18,7 +18,14 @@ class Condition1(Page):
   form_fields = ['choice', 'actions_seq']
 
   def is_displayed(self):
-    return self.round_number <= (Constants.rows_per_condition)
+    return self.participant.vars['ind_cond_1_first'] and (self.round_number <= Constants.rows_per_condition) or \
+    not self.participant.vars['ind_cond_1_first'] and (self.round_number > int(Constants.rows_per_condition / 10))
+
+  def vars_for_template(self):
+    return dict(
+      question_number = self.round_number if self.participant.vars['ind_cond_1_first'] \
+      else self.round_number - int(Constants.rows_per_condition / 10),
+    )
 
   def before_next_page(self):
     self.player.checked = 'C' in self.player.actions_seq
@@ -35,11 +42,13 @@ class Condition10(Page):
                   'actions_seq_7', 'actions_seq_8', 'actions_seq_9', 'actions_seq_10']
   
   def is_displayed(self):
-    return self.round_number > (Constants.rows_per_condition)
-  
+    return self.participant.vars['ind_cond_1_first'] and (self.round_number > Constants.rows_per_condition) or \
+    not self.participant.vars['ind_cond_1_first'] and (self.round_number <= int(Constants.rows_per_condition / 10))
+
   def vars_for_template(self):
     return dict(
-      question_number = self.round_number - Constants.rows_per_condition,
+      question_number = self.round_number - Constants.rows_per_condition \
+        if self.participant.vars['ind_cond_1_first'] else self.round_number,
       total_questions_number = int(Constants.rows_per_condition / 10),
     )
   
@@ -68,7 +77,8 @@ class Condition10(Page):
 
 class BetweenConditions(Page):
   def is_displayed(self):
-    return self.round_number == (Constants.rows_per_condition + 1)
+    return (self.round_number == (Constants.rows_per_condition + 1)) and self.participant.vars['ind_cond_1_first'] \
+    or (self.round_number == (int(Constants.rows_per_condition / 10) + 1)) and not self.participant.vars['ind_cond_1_first']
 
 
 class ShortQuestionnarie(Page):
@@ -103,8 +113,8 @@ class EndGame(Page):
 page_sequence = [
   Initial,
   Instructions,
-  Condition1,
   BetweenConditions,
+  Condition1,
   Condition10,
   ShortQuestionnarie,
   EndGame

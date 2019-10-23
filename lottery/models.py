@@ -20,8 +20,8 @@ class Constants(BaseConstants):
     with open('lottery/test-problems.csv') as prob_file:
         data = list(csv.DictReader(prob_file))
         total_rows = len(data)
-        temp_arr_1 = [i for i in range(0,int(total_rows / 2))]
-        temp_arr_10 = [i for i in range(int(total_rows / 2),total_rows)]
+        temp_arr_1 = [i for i in range(1, int(total_rows / 2) + 1)]
+        temp_arr_10 = [i for i in range(int(total_rows / 2) + 1, total_rows + 1)]
 
     check_cost = 5
    
@@ -37,28 +37,51 @@ class Subsession(BaseSubsession):
         if self.round_number == 1:
             self.session.vars['data'] = Constants.data.copy()
             for p in self.session.get_participants():
+                p.vars['ind_cond_1_first'] = random.choice([True, False])
+
                 p.vars['ind_cond_1'] = random.sample(Constants.temp_arr_1, int(Constants.total_rows / 2))
                 p.vars['ind_cond_10'] = random.sample(Constants.temp_arr_10, int(Constants.total_rows / 2))
 
-                paying_round = random.randint(1, Constants.rows_per_condition)
+                num_cond_10_rounds = int(Constants.rows_per_condition / 10)
+
+                paying_round = random.randint(1, Constants.rows_per_condition) if p.vars['ind_cond_1_first'] \
+                else random.randint(num_cond_10_rounds + 1, num_cond_10_rounds + Constants.rows_per_condition)
                 p.vars['paying_round'] = paying_round
 
-        if self.round_number <= Constants.rows_per_condition:
-            for p in self.session.get_participants():
-                lottery_number_cond_1 = p.vars['ind_cond_1'][self.round_number - 1]
-                p.vars['current_lottery_cond_1'] = self.session.vars['data'][lottery_number_cond_1 - 1]
-                for i in range(1,6):
-                    p.vars['probA' + str(i)] = p.vars['current_lottery_cond_1']['probA' + str(i)]
-                    p.vars['realA' + str(i)] = p.vars['current_lottery_cond_1']['realA' + str(i)]
-                    p.vars['probB' + str(i)] = p.vars['current_lottery_cond_1']['probB' + str(i)]
-                    p.vars['realB' + str(i)] = p.vars['current_lottery_cond_1']['realB' + str(i)]
+        for p in self.session.get_participants():
+            if p.vars['ind_cond_1_first']:
+                if self.round_number <= Constants.rows_per_condition:
+                    lottery_number_cond_1 = p.vars['ind_cond_1'][self.round_number - 1]
+                    self.fill_cond_1(lottery_number_cond_1, p)
+                else:
+                    first_lottery_ind_cond_10 = (self.round_number - Constants.rows_per_condition - 1) * 10
+                    self.fill_cond_10(first_lottery_ind_cond_10, p)
+            else:
+                if self.round_number <= Constants.rows_per_condition / 10:
+                    first_lottery_ind_cond_10 = (self.round_number - 1) * 10
+                    self.fill_cond_10(first_lottery_ind_cond_10, p)
+                else:
+                    lottery_number_cond_1 = p.vars['ind_cond_1'][self.round_number - int(Constants.rows_per_condition / 10) - 1]
+                    self.fill_cond_1(lottery_number_cond_1, p)
 
-            # random initial choice for condition-1
-            # to enable it, uncomment next two lines 
-            # for player in self.get_players():
-            #     player.initial_choice = random.choice(['A', 'B'])
 
-            for player, p in zip(self.get_players(), self.session.get_participants()):
+    def fill_cond_1(self, lottery_number_cond_1, p):
+        p.vars['current_lottery_cond_1'] = self.session.vars['data'][lottery_number_cond_1 - 1]
+        for i in range(1,6):
+            p.vars['probA' + str(i)] = p.vars['current_lottery_cond_1']['probA' + str(i)]
+            p.vars['realA' + str(i)] = p.vars['current_lottery_cond_1']['realA' + str(i)]
+            p.vars['probB' + str(i)] = p.vars['current_lottery_cond_1']['probB' + str(i)]
+            p.vars['realB' + str(i)] = p.vars['current_lottery_cond_1']['realB' + str(i)]
+
+        # random initial choice for condition-1
+        # to enable it, uncomment next three lines 
+        # for player in self.get_players():
+        #     if p == player.participant:
+        #         player.initial_choice = random.choice(['A', 'B'])
+
+        for player in self.get_players():
+            if p == player.participant:
+
                 player.probA1 = '{:.2f}'.format(float(p.vars['probA1']))
                 player.realA1 = p.vars['realA1']
                 player.probB1 = '{:.2f}'.format(float(p.vars['probB1']))
@@ -84,37 +107,36 @@ class Subsession(BaseSubsession):
                 player.probB5 = '{:.2f}'.format(float(p.vars['probB5']))
                 player.realB5 = p.vars['realB5']
 
-        else:
-            first_lottery_ind_cond_10 = (self.round_number - Constants.rows_per_condition - 1) * 10
-            
-            for p in self.session.get_participants():
-                lottery_number_cond_10 = p.vars['ind_cond_10'][first_lottery_ind_cond_10:first_lottery_ind_cond_10 + 10]
+    def fill_cond_10(self, first_lottery_ind_cond_10, p):
+        lottery_number_cond_10 = p.vars['ind_cond_10'][first_lottery_ind_cond_10:first_lottery_ind_cond_10 + 10]
 
-                for k in lottery_number_cond_10:
-                    current_lottery_cond_10 = self.session.vars['data'][k - 1]
+        for k in lottery_number_cond_10:
+            current_lottery_cond_10 = self.session.vars['data'][k - 1]
 
-                    for i in range(1,6):
-                        suffix = str(i) + '_' + str(lottery_number_cond_10.index(k) + 1)
-                        p.vars['probA' + suffix] = current_lottery_cond_10['probA' + str(i)]
-                        p.vars['realA' + suffix] = current_lottery_cond_10['realA' + str(i)]
-                        p.vars['probB' + suffix] = current_lottery_cond_10['probB' + str(i)]
-                        p.vars['realB' + suffix] = current_lottery_cond_10['realB' + str(i)]
+            for i in range(1,6):
+                suffix = str(i) + '_' + str(lottery_number_cond_10.index(k) + 1)
+                p.vars['probA' + suffix] = current_lottery_cond_10['probA' + str(i)]
+                p.vars['realA' + suffix] = current_lottery_cond_10['realA' + str(i)]
+                p.vars['probB' + suffix] = current_lottery_cond_10['probB' + str(i)]
+                p.vars['realB' + suffix] = current_lottery_cond_10['realB' + str(i)]
 
-            # random initial choice for condition-10
-            # to enable it, uncomment next 11 lines 
-            # for player in self.get_players():
-            #         player.initial_choice_1 = random.choice(['A', 'B'])
-            #         player.initial_choice_2 = random.choice(['A', 'B'])
-            #         player.initial_choice_3 = random.choice(['A', 'B'])
-            #         player.initial_choice_4 = random.choice(['A', 'B'])
-            #         player.initial_choice_5 = random.choice(['A', 'B'])
-            #         player.initial_choice_6 = random.choice(['A', 'B'])
-            #         player.initial_choice_7 = random.choice(['A', 'B'])
-            #         player.initial_choice_8 = random.choice(['A', 'B'])
-            #         player.initial_choice_9 = random.choice(['A', 'B'])
-            #         player.initial_choice_10 = random.choice(['A', 'B'])
+        # random initial choice for condition-10
+        # to enable it, uncomment next 12 lines 
+        # for player in self.get_players():
+        #     if p == player.participant:
+        #         player.initial_choice_1 = random.choice(['A', 'B'])
+        #         player.initial_choice_2 = random.choice(['A', 'B'])
+        #         player.initial_choice_3 = random.choice(['A', 'B'])
+        #         player.initial_choice_4 = random.choice(['A', 'B'])
+        #         player.initial_choice_5 = random.choice(['A', 'B'])
+        #         player.initial_choice_6 = random.choice(['A', 'B'])
+        #         player.initial_choice_7 = random.choice(['A', 'B'])
+        #         player.initial_choice_8 = random.choice(['A', 'B'])
+        #         player.initial_choice_9 = random.choice(['A', 'B'])
+        #         player.initial_choice_10 = random.choice(['A', 'B'])
 
-            for player, p in zip(self.get_players(), self.session.get_participants()):
+        for player in self.get_players():
+            if p == player.participant:
                 player.probA1_1 = '{:.2f}'.format(float(p.vars['probA1_1']))
                 player.realA1_1 = p.vars['realA1_1']
                 player.probB1_1 = '{:.2f}'.format(float(p.vars['probB1_1']))
@@ -365,6 +387,7 @@ class Subsession(BaseSubsession):
                 player.probB5_10 = '{:.2f}'.format(float(p.vars['probB5_10']))
                 player.realB5_10 = p.vars['realB5_10']
 
+
 class Group(BaseGroup):
     pass
 
@@ -400,9 +423,9 @@ class Player(BasePlayer):
     def get_payoff(self, paying_round):
         selected_player = self.in_round(paying_round)
         if selected_player.checked:
-            self.payoff = c((selected_player.real - Constants.check_cost) * 0.01)
+            self.payoff = c(selected_player.real - Constants.check_cost)
         else: 
-            self.payoff = c(selected_player.real * 0.01)
+            self.payoff = c(selected_player.real)
 
     submitted_answer_1 = make_field()
     submitted_answer_2 = make_field()
