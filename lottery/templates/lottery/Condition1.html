@@ -74,7 +74,7 @@
     
     <div class="controls field-choice">
       <div class="form-check form-check-inline">
-        {% if Constants.initial_choice == 'A' or player.initial_choice == 'A' %}
+        {% if Constants.initial_choice == 'A' or player.initial_choice == 'A' or player.initial_choice_ev == 'A' %}
           <input type="radio" name="choice" value="A" checked required="" id="id_choice_0" class="form-check-input">
         {% else %}
           <input type="radio" name="choice" value="A" required="" id="id_choice_0" class="form-check-input">
@@ -83,7 +83,7 @@
       </div>
 
       <div class="form-check form-check-inline">
-        {% if Constants.initial_choice == 'B' or player.initial_choice == 'B' %}
+        {% if Constants.initial_choice == 'B' or player.initial_choice == 'B' or player.initial_choice_ev == 'B' %}
           <input type="radio" name="choice" value="B" checked required="" id="id_choice_1" class="form-check-input">
         {% else %}
           <input type="radio" name="choice" value="B" required="" id="id_choice_1" class="form-check-input">

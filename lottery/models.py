@@ -29,6 +29,10 @@ class Constants(BaseConstants):
     # to disable static initial choice, set it to empty string
     initial_choice = ''
 
+    # initial choice could be 'higher', 'worst' or 'prob_default'
+    # to disable static initial choice, set it to empty string
+    initial_ev_choice = ''
+
     rows_per_condition = int(total_rows / 2)
     num_rounds = int(total_rows / 2 + total_rows / 20)
 
@@ -65,6 +69,10 @@ class Subsession(BaseSubsession):
                     self.fill_cond_1(lottery_number_cond_1, p)
 
 
+    def ev(self, p1, r1, p2, r2, p3, r3, p4, r4, p5, r5):
+        return float(p1) * float(r1) + float(p2) * float(r2) + \
+                    float(p3) * float(r3) + float(p4) * float(r4) + float(p5) * float(r5)
+    
     def fill_cond_1(self, lottery_number_cond_1, p):
         p.vars['current_lottery_cond_1'] = self.session.vars['data'][lottery_number_cond_1 - 1]
         for i in range(1,6):
@@ -81,7 +89,6 @@ class Subsession(BaseSubsession):
 
         for player in self.get_players():
             if p == player.participant:
-
                 player.probA1 = '{:.2f}'.format(float(p.vars['probA1']))
                 player.realA1 = p.vars['realA1']
                 player.probB1 = '{:.2f}'.format(float(p.vars['probB1']))
@@ -106,6 +113,20 @@ class Subsession(BaseSubsession):
                 player.realA5 = p.vars['realA5']
                 player.probB5 = '{:.2f}'.format(float(p.vars['probB5']))
                 player.realB5 = p.vars['realB5']
+
+                player.ev_a = self.ev(player.probA1, player.realA1, player.probA2, player.realA2,\
+                    player.probA3, player.realA3, player.probA4, player.realA4, player.probA5, player.realA5)
+                player.ev_b = self.ev(player.probB1, player.realB1, player.probB2, player.realB2,\
+                    player.probB3, player.realB3, player.probB4, player.realB4, player.probB5, player.realB5)
+
+                if (Constants.initial_ev_choice == 'higher'):
+                    player.initial_choice_ev = 'A' if player.ev_a > player.ev_b else 'B'
+                elif (Constants.initial_ev_choice == 'worst'):
+                    player.initial_choice_ev = 'A' if player.ev_a <= player.ev_b else 'B'
+                elif (Constants.initial_ev_choice == 'prob_default'):
+                    higher = 'A' if player.ev_a > player.ev_b else 'B'
+                    worst = 'A' if player.ev_a <= player.ev_b else 'B'
+                    player.initial_choice_ev = higher if self.round_number < Constants.rows_per_condition * 0.8 else worst
 
     def fill_cond_10(self, first_lottery_ind_cond_10, p):
         lottery_number_cond_10 = p.vars['ind_cond_10'][first_lottery_ind_cond_10:first_lottery_ind_cond_10 + 10]
@@ -387,6 +408,109 @@ class Subsession(BaseSubsession):
                 player.probB5_10 = '{:.2f}'.format(float(p.vars['probB5_10']))
                 player.realB5_10 = p.vars['realB5_10']
 
+                player.ev_a_1 = self.ev(player.probA1_1, player.realA1_1, player.probA2_1, player.realA2_1, \
+                    player.probA3_1, player.realA3_1, player.probA4_1, player.realA4_1, player.probA5_1, player.realA5_1)
+                player.ev_b_1 = self.ev(player.probB1_1, player.realB1_1, player.probB2_1, player.realB2_1, \
+                    player.probB3_1, player.realB3_1, player.probB4_1, player.realB4_1, player.probB5_1, player.realB5_1)
+
+                player.ev_a_2 = self.ev(player.probA1_2, player.realA1_2, player.probA2_2, player.realA2_2, \
+                    player.probA3_2, player.realA3_2, player.probA4_2, player.realA4_2, player.probA5_2, player.realA5_2)
+                player.ev_b_2 = self.ev(player.probB1_2, player.realB1_2, player.probB2_2, player.realB2_2, \
+                    player.probB3_2, player.realB3_2, player.probB4_2, player.realB4_2, player.probB5_2, player.realB5_2)
+
+                player.ev_a_3 = self.ev(player.probA1_3, player.realA1_3, player.probA2_3, player.realA2_3, \
+                    player.probA3_3, player.realA3_3, player.probA4_3, player.realA4_3, player.probA5_3, player.realA5_3)
+                player.ev_b_3 = self.ev(player.probB1_3, player.realB1_3, player.probB2_3, player.realB2_3, \
+                    player.probB3_3, player.realB3_3, player.probB4_3, player.realB4_3, player.probB5_3, player.realB5_3)
+
+                player.ev_a_4 = self.ev(player.probA1_4, player.realA1_4, player.probA2_4, player.realA2_4, \
+                    player.probA3_4, player.realA3_4, player.probA4_4, player.realA4_4, player.probA5_4, player.realA5_4)
+                player.ev_b_4 = self.ev(player.probB1_4, player.realB1_4, player.probB2_4, player.realB2_4, \
+                    player.probB3_4, player.realB3_4, player.probB4_4, player.realB4_4, player.probB5_4, player.realB5_4)
+
+                player.ev_a_5 = self.ev(player.probA1_5, player.realA1_5, player.probA2_5, player.realA2_5, \
+                    player.probA3_5, player.realA3_5, player.probA4_5, player.realA4_5, player.probA5_5, player.realA5_5)
+                player.ev_b_5 = self.ev(player.probB1_5, player.realB1_5, player.probB2_5, player.realB2_5, \
+                    player.probB3_5, player.realB3_5, player.probB4_5, player.realB4_5, player.probB5_5, player.realB5_5)
+
+                player.ev_a_6 = self.ev(player.probA1_6, player.realA1_6, player.probA2_6, player.realA2_6, \
+                    player.probA3_6, player.realA3_6, player.probA4_6, player.realA4_6, player.probA5_6, player.realA5_6)
+                player.ev_b_6 = self.ev(player.probB1_6, player.realB1_6, player.probB2_6, player.realB2_6, \
+                    player.probB3_6, player.realB3_6, player.probB4_6, player.realB4_6, player.probB5_6, player.realB5_6)
+
+                player.ev_a_7 = self.ev(player.probA1_7, player.realA1_7, player.probA2_7, player.realA2_7, \
+                    player.probA3_7, player.realA3_7, player.probA4_7, player.realA4_7, player.probA5_7, player.realA5_7)
+                player.ev_b_7 = self.ev(player.probB1_7, player.realB1_7, player.probB2_7, player.realB2_7, \
+                    player.probB3_7, player.realB3_7, player.probB4_7, player.realB4_7, player.probB5_7, player.realB5_7)
+
+                player.ev_a_8 = self.ev(player.probA1_8, player.realA1_8, player.probA2_8, player.realA2_8, \
+                    player.probA3_8, player.realA3_8, player.probA4_8, player.realA4_8, player.probA5_8, player.realA5_8)
+                player.ev_b_8 = self.ev(player.probB1_8, player.realB1_8, player.probB2_8, player.realB2_8, \
+                    player.probB3_8, player.realB3_8, player.probB4_8, player.realB4_8, player.probB5_8, player.realB5_8)
+
+                player.ev_a_9 = self.ev(player.probA1_9, player.realA1_9, player.probA2_9, player.realA2_9, \
+                    player.probA3_9, player.realA3_9, player.probA4_9, player.realA4_9, player.probA5_9, player.realA5_9)
+                player.ev_b_9 = self.ev(player.probB1_9, player.realB1_9, player.probB2_9, player.realB2_9, \
+                    player.probB3_9, player.realB3_9, player.probB4_9, player.realB4_9, player.probB5_9, player.realB5_9)
+
+                player.ev_a_10 = self.ev(player.probA1_10, player.realA1_10, player.probA2_10, player.realA2_10, \
+                    player.probA3_10, player.realA3_10, player.probA4_10, player.realA4_10, player.probA5_10, player.realA5_10)
+                player.ev_b_10 = self.ev(player.probB1_10, player.realB1_10, player.probB2_10, player.realB2_10, \
+                    player.probB3_10, player.realB3_10, player.probB4_10, player.realB4_10, player.probB5_10, player.realB5_10)
+
+                if (Constants.initial_ev_choice == 'higher'):
+                    player.initial_choice_ev_1 = 'A' if player.ev_a_1 > player.ev_b_1 else 'B'
+                    player.initial_choice_ev_2 = 'A' if player.ev_a_2 > player.ev_b_2 else 'B'
+                    player.initial_choice_ev_3 = 'A' if player.ev_a_3 > player.ev_b_3 else 'B'
+                    player.initial_choice_ev_4 = 'A' if player.ev_a_4 > player.ev_b_4 else 'B'
+                    player.initial_choice_ev_5 = 'A' if player.ev_a_5 > player.ev_b_5 else 'B'
+                    player.initial_choice_ev_6 = 'A' if player.ev_a_6 > player.ev_b_6 else 'B'
+                    player.initial_choice_ev_7 = 'A' if player.ev_a_7 > player.ev_b_7 else 'B'
+                    player.initial_choice_ev_8 = 'A' if player.ev_a_8 > player.ev_b_8 else 'B'
+                    player.initial_choice_ev_9 = 'A' if player.ev_a_9 > player.ev_b_9 else 'B'
+                    player.initial_choice_ev_10 = 'A' if player.ev_a_10 > player.ev_b_10 else 'B'
+                elif (Constants.initial_ev_choice == 'worst'):
+                    player.initial_choice_ev_1 = 'A' if player.ev_a_1 <= player.ev_b_1 else 'B'
+                    player.initial_choice_ev_2 = 'A' if player.ev_a_2 <= player.ev_b_2 else 'B'
+                    player.initial_choice_ev_3 = 'A' if player.ev_a_3 <= player.ev_b_3 else 'B'
+                    player.initial_choice_ev_4 = 'A' if player.ev_a_4 <= player.ev_b_4 else 'B'
+                    player.initial_choice_ev_5 = 'A' if player.ev_a_5 <= player.ev_b_5 else 'B'
+                    player.initial_choice_ev_6 = 'A' if player.ev_a_6 <= player.ev_b_6 else 'B'
+                    player.initial_choice_ev_7 = 'A' if player.ev_a_7 <= player.ev_b_7 else 'B'
+                    player.initial_choice_ev_8 = 'A' if player.ev_a_8 <= player.ev_b_8 else 'B'
+                    player.initial_choice_ev_9 = 'A' if player.ev_a_9 <= player.ev_b_9 else 'B'
+                    player.initial_choice_ev_10 = 'A' if player.ev_a_10 <= player.ev_b_10 else 'B'
+                elif (Constants.initial_ev_choice == 'prob_default'):
+                    higher_1 = 'A' if player.ev_a_1 > player.ev_b_1 else 'B'
+                    worst_1 = 'A' if player.ev_a_1 <= player.ev_b_1 else 'B'
+                    higher_2 = 'A' if player.ev_a_2 > player.ev_b_2 else 'B'
+                    worst_2 = 'A' if player.ev_a_2 <= player.ev_b_2 else 'B'
+                    higher_3 = 'A' if player.ev_a_3 > player.ev_b_3 else 'B'
+                    worst_3 = 'A' if player.ev_a_3 <= player.ev_b_3 else 'B'
+                    higher_4 = 'A' if player.ev_a_4 > player.ev_b_4 else 'B'
+                    worst_4 = 'A' if player.ev_a_4 <= player.ev_b_4 else 'B'
+                    higher_5 = 'A' if player.ev_a_5 > player.ev_b_5 else 'B'
+                    worst_5 = 'A' if player.ev_a_5 <= player.ev_b_5 else 'B'
+                    higher_6 = 'A' if player.ev_a_6 > player.ev_b_6 else 'B'
+                    worst_6 = 'A' if player.ev_a_6 <= player.ev_b_6 else 'B'
+                    higher_7 = 'A' if player.ev_a_7 > player.ev_b_7 else 'B'
+                    worst_7 = 'A' if player.ev_a_7 <= player.ev_b_7 else 'B'
+                    higher_8 = 'A' if player.ev_a_8 > player.ev_b_8 else 'B'
+                    worst_8 = 'A' if player.ev_a_8 <= player.ev_b_8 else 'B'
+                    higher_9 = 'A' if player.ev_a_9 > player.ev_b_9 else 'B'
+                    worst_9 = 'A' if player.ev_a_9 <= player.ev_b_9 else 'B'
+                    higher_10 = 'A' if player.ev_a_10 > player.ev_b_10 else 'B'
+                    worst_10 = 'A' if player.ev_a_10 <= player.ev_b_10 else 'B'
+                    player.initial_choice_ev_1 = higher_1 if self.round_number <= 8 else worst_1
+                    player.initial_choice_ev_2 = higher_2 if self.round_number <= 8 else worst_2
+                    player.initial_choice_ev_3 = higher_3 if self.round_number <= 8 else worst_3
+                    player.initial_choice_ev_4 = higher_4 if self.round_number <= 8 else worst_4
+                    player.initial_choice_ev_5 = higher_5 if self.round_number <= 8 else worst_5
+                    player.initial_choice_ev_6 = higher_6 if self.round_number <= 8 else worst_6
+                    player.initial_choice_ev_7 = higher_7 if self.round_number <= 8 else worst_7
+                    player.initial_choice_ev_8 = higher_8 if self.round_number <= 8 else worst_8
+                    player.initial_choice_ev_9 = higher_9 if self.round_number <= 8 else worst_9
+                    player.initial_choice_ev_10 = higher_10 if self.round_number <= 8 else worst_10
 
 class Group(BaseGroup):
     pass
@@ -395,7 +519,6 @@ def make_field():
     return models.StringField(
         choices=['A', 'B'],
         widget=widgets.RadioSelectHorizontal)
-
 
 class Player(BasePlayer):
     age = models.IntegerField()
@@ -410,6 +533,9 @@ class Player(BasePlayer):
     checked = models.BooleanField(
         initial=False
     )
+    ev_a = models.FloatField()
+    ev_b = models.FloatField()
+    initial_choice_ev = models.StringField()
 
     def realization(self):
         if (self.choice == 'A'):
@@ -426,6 +552,39 @@ class Player(BasePlayer):
             self.payoff = c(selected_player.real - Constants.check_cost)
         else: 
             self.payoff = c(selected_player.real)
+
+    ev_a_1 = models.FloatField()
+    ev_a_2 = models.FloatField()
+    ev_a_3 = models.FloatField()
+    ev_a_4 = models.FloatField()
+    ev_a_5 = models.FloatField()
+    ev_a_6 = models.FloatField()
+    ev_a_7 = models.FloatField()
+    ev_a_8 = models.FloatField()
+    ev_a_9 = models.FloatField()
+    ev_a_10 = models.FloatField()
+
+    ev_b_1 = models.FloatField()
+    ev_b_2 = models.FloatField()
+    ev_b_3 = models.FloatField()
+    ev_b_4 = models.FloatField()
+    ev_b_5 = models.FloatField()
+    ev_b_6 = models.FloatField()
+    ev_b_7 = models.FloatField()
+    ev_b_8 = models.FloatField()
+    ev_b_9 = models.FloatField()
+    ev_b_10 = models.FloatField()
+
+    initial_choice_ev_1 = models.StringField()
+    initial_choice_ev_2 = models.StringField()
+    initial_choice_ev_3 = models.StringField()
+    initial_choice_ev_4 = models.StringField()
+    initial_choice_ev_5 = models.StringField()
+    initial_choice_ev_6 = models.StringField()
+    initial_choice_ev_7 = models.StringField()
+    initial_choice_ev_8 = models.StringField()
+    initial_choice_ev_9 = models.StringField()
+    initial_choice_ev_10 = models.StringField()
 
     submitted_answer_1 = make_field()
     submitted_answer_2 = make_field()
