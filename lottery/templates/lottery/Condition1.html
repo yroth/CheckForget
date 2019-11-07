@@ -12,6 +12,9 @@
       var radioBtns = document.getElementsByName("choice")
       var probTable = document.getElementById('prob-table')
       var actionSeqDataField  = document.getElementById('id_actions_seq')
+      var realizationField  = document.getElementById('id_real')
+      var realizationWrapper  = document.getElementById('real')
+      var realizationText  = document.getElementById('real-text')
       
       radioBtns.forEach((el) => {
         if (el.checked) {
@@ -21,6 +24,31 @@
           actionSeqDataField.value = actionSeqDataField.value + el.value
         })
       })
+
+      var listA = [
+        {title: {{player.realA1|json }}, id: 0, weight: {{player.probA1|json }}},
+        {title: {{player.realA2|json }}, id: 0, weight: {{player.probA2|json }}},
+        {title: {{player.realA3|json }}, id: 0, weight: {{player.probA3|json }}},
+        {title: {{player.realA4|json }}, id: 0, weight: {{player.probA4|json }}},
+        {title: {{player.realA5|json }}, id: 0, weight: {{player.probA5|json }}}
+      ]
+
+      var listB = [
+        {title: {{player.realB1|json }}, id: 0, weight: {{player.probB1|json }}},
+        {title: {{player.realB2|json }}, id: 0, weight: {{player.probB2|json }}},
+        {title: {{player.realB3|json }}, id: 0, weight: {{player.probB3|json }}},
+        {title: {{player.realB4|json }}, id: 0, weight: {{player.probB4|json }}},
+        {title: {{player.realB5|json }}, id: 0, weight: {{player.probB5|json }}}
+      ]
+
+      var weight = (arr) => {
+        return [].concat(...arr.map((obj) => Array(Math.ceil(obj.weight * 100)).fill(obj)))
+      }
+
+      var pick = function(arr) {
+        let weighted = weight(arr)
+        return weighted[Math.floor(Math.random() * weighted.length)]
+      }
       
       function acceptChoice() {
         if (!document.getElementById('id_choice_0').checked && !document.getElementById('id_choice_1').checked) {
@@ -30,6 +58,24 @@
         next.disabled = false
         accept.disabled = true
         check.disabled = true
+
+        var choiceValue
+        radioBtns.forEach((el) => {
+          if (el.checked) {
+            choiceValue = el.value
+          }
+        })
+
+        if (choiceValue === 'A') {
+          realizationField.value = pick(listA).title
+        } else {
+          realizationField.value = pick(listB).title
+        }
+
+        if ({{ Constants.show_feedback|json }}) {
+          realizationText.innerHTML = 'Your choice was <b>' + choiceValue + '</b> and the realization was '
+          realizationWrapper.classList.remove('hidden-realization')
+        }
 
         $(':radio,:checkbox').click(function(){
           return false
@@ -74,7 +120,7 @@
     
     <div class="controls field-choice">
       <div class="form-check form-check-inline">
-        {% if Constants.initial_choice == 'A' or player.initial_choice == 'A' or player.initial_choice_ev == 'A' %}
+        {% if Constants.initial_choice == 'A' or player.random_initial_choice == 'A' or player.initial_choice_ev == 'A' %}
           <input type="radio" name="choice" value="A" checked required="" id="id_choice_0" class="form-check-input">
         {% else %}
           <input type="radio" name="choice" value="A" required="" id="id_choice_0" class="form-check-input">
@@ -83,7 +129,7 @@
       </div>
 
       <div class="form-check form-check-inline">
-        {% if Constants.initial_choice == 'B' or player.initial_choice == 'B' or player.initial_choice_ev == 'B' %}
+        {% if Constants.initial_choice == 'B' or player.random_initial_choice == 'B' or player.initial_choice_ev == 'B' %}
           <input type="radio" name="choice" value="B" checked required="" id="id_choice_1" class="form-check-input">
         {% else %}
           <input type="radio" name="choice" value="B" required="" id="id_choice_1" class="form-check-input">
@@ -96,6 +142,11 @@
       <input name="actions_seq" required="" id="id_actions_seq" class="form-control">
     </div>
 
+    <div id="real" class="controls field-real hidden-realization">
+      <span id="real-text"></span>
+      <input name="real" readonly required="" id="id_real" class="form-control realization-input">
+    </div>
+
     <button id="accept" type="button" class="primary-btn btn-accept" onclick="acceptChoice()">
       Accept
     </button>
@@ -104,5 +155,9 @@
     </button>
 
     <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
+
+    <div>{{ form.real.errors }}</div>
+    <div>{{ form.actions_seq.errors }}</div>
+    <div>{{ form.choice.errors }}</div>
 
 {% endblock %}

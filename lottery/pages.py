@@ -15,7 +15,7 @@ class Instructions(Page):
 
 class Condition1(Page):
   form_model = 'player'
-  form_fields = ['choice', 'actions_seq']
+  form_fields = ['choice', 'actions_seq', 'real']
 
   def is_displayed(self):
     return self.participant.vars['ind_cond_1_first'] and (self.round_number <= Constants.rows_per_condition) or \
@@ -29,8 +29,6 @@ class Condition1(Page):
 
   def before_next_page(self):
     self.player.checked = 'C' in self.player.actions_seq
-    self.player.realization()
-
 
 class Condition10(Page):
   form_model = 'player'
@@ -63,17 +61,6 @@ class Condition10(Page):
     self.player.checked_8 = 'C' in self.player.actions_seq_8
     self.player.checked_9 = 'C' in self.player.actions_seq_9
     self.player.checked_10 = 'C' in self.player.actions_seq_10
-    self.player.realization_1()
-    self.player.realization_2()
-    self.player.realization_3()
-    self.player.realization_4()
-    self.player.realization_5()
-    self.player.realization_6()
-    self.player.realization_7()
-    self.player.realization_8()
-    self.player.realization_9()
-    self.player.realization_10()
-
 
 class BetweenConditions(Page):
   def is_displayed(self):
