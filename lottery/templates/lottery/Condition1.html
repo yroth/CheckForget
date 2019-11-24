@@ -74,7 +74,7 @@
 
         if ({{ Constants.show_feedback|json }}) {
           realizationText.innerHTML = 'Your choice was <b>' + choiceValue + '</b> and the realization was '
-          realizationWrapper.classList.remove('hidden-realization')
+          realizationField.classList.remove('hidden-realization')
         }
 
         $(':radio,:checkbox').click(function(){
@@ -142,9 +142,9 @@
       <input name="actions_seq" required="" id="id_actions_seq" class="form-control">
     </div>
 
-    <div id="real" class="controls field-real hidden-realization">
+    <div id="real" class="controls field-real">
       <span id="real-text"></span>
-      <input name="real" readonly required="" id="id_real" class="form-control realization-input">
+      <input name="real" readonly required="" id="id_real" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept" type="button" class="primary-btn btn-accept" onclick="acceptChoice()">

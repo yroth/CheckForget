@@ -212,7 +212,7 @@
 
       if ({{ Constants.show_feedback|json }}) {
           realizationText.innerHTML = 'Your choice was <b>' + choiceValue + '</b> and the realization was '
-          realizationWrapper.classList.remove('hidden-realization')
+          realizationField.classList.remove('hidden-realization')
         }
 
       event.target.disabled = true
@@ -299,9 +299,9 @@
       <input name="actions_seq_1" required="" id="id_actions_seq_1" class="form-control">
     </div>
 
-    <div id="real_1" class="controls field-real_1 hidden-realization">
+    <div id="real_1" class="controls field-real_1">
       <span id="real-text_1"></span>
-      <input name="real_1" readonly required="" id="id_real_1" class="form-control realization-input">
+      <input name="real_1" readonly required="" id="id_real_1" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_1" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -364,9 +364,9 @@
       <input name="actions_seq_2" required="" id="id_actions_seq_2" class="form-control">
     </div>
 
-    <div id="real_2" class="controls field-real_2 hidden-realization">
+    <div id="real_2" class="controls field-real_2">
       <span id="real-text_2"></span>
-      <input name="real_2" readonly required="" id="id_real_2" class="form-control realization-input">
+      <input name="real_2" readonly required="" id="id_real_2" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_2" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -428,9 +428,9 @@
       <input name="actions_seq_3" required="" id="id_actions_seq_3" class="form-control">
     </div>
 
-    <div id="real_3" class="controls field-real_3 hidden-realization">
+    <div id="real_3" class="controls field-real_3">
       <span id="real-text_3"></span>
-      <input name="real_3" readonly required="" id="id_real_3" class="form-control realization-input">
+      <input name="real_3" readonly required="" id="id_real_3" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_3" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -492,9 +492,9 @@
       <input name="actions_seq_4" required="" id="id_actions_seq_4" class="form-control">
     </div>
 
-    <div id="real_4" class="controls field-real_4 hidden-realization">
+    <div id="real_4" class="controls field-real_4">
       <span id="real-text_4"></span>
-      <input name="real_4" readonly required="" id="id_real_4" class="form-control realization-input">
+      <input name="real_4" readonly required="" id="id_real_4" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_4" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -556,9 +556,9 @@
       <input name="actions_seq_5" required="" id="id_actions_seq_5" class="form-control">
     </div>
 
-    <div id="real_5" class="controls field-real_5 hidden-realization">
+    <div id="real_5" class="controls field-real_5">
       <span id="real-text_5"></span>
-      <input name="real_5" readonly required="" id="id_real_5" class="form-control realization-input">
+      <input name="real_5" readonly required="" id="id_real_5" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_5" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -620,9 +620,9 @@
       <input name="actions_seq_6" required="" id="id_actions_seq_6" class="form-control">
     </div>
 
-    <div id="real_6" class="controls field-real_6 hidden-realization">
+    <div id="real_6" class="controls field-real_6">
       <span id="real-text_6"></span>
-      <input name="real_6" readonly required="" id="id_real_6" class="form-control realization-input">
+      <input name="real_6" readonly required="" id="id_real_6" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_6" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -685,9 +685,9 @@
       <input name="actions_seq_7" required="" id="id_actions_seq_7" class="form-control">
     </div>
 
-    <div id="real_7" class="controls field-real_7 hidden-realization">
+    <div id="real_7" class="controls field-real_7">
       <span id="real-text_7"></span>
-      <input name="real_7" readonly required="" id="id_real_7" class="form-control realization-input">
+      <input name="real_7" readonly required="" id="id_real_7" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_7" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -749,9 +749,9 @@
       <input name="actions_seq_8" required="" id="id_actions_seq_8" class="form-control">
     </div>
 
-    <div id="real_8" class="controls field-real_8 hidden-realization">
+    <div id="real_8" class="controls field-real_8">
       <span id="real-text_8"></span>
-      <input name="real_8" readonly required="" id="id_real_8" class="form-control realization-input">
+      <input name="real_8" readonly required="" id="id_real_8" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_8" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -813,9 +813,9 @@
       <input name="actions_seq_9" required="" id="id_actions_seq_9" class="form-control">
     </div>
 
-    <div id="real_9" class="controls field-real_9 hidden-realization">
+    <div id="real_9" class="controls field-real_9">
       <span id="real-text_9"></span>
-      <input name="real_9" readonly required="" id="id_real_9" class="form-control realization-input">
+      <input name="real_9" readonly required="" id="id_real_9" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_9" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -877,9 +877,9 @@
       <input name="actions_seq_10" required="" id="id_actions_seq_10" class="form-control">
     </div>
 
-    <div id="real_10" class="controls field-real_10 hidden-realization">
+    <div id="real_10" class="controls field-real_10">
       <span id="real-text_10"></span>
-      <input name="real_10" readonly required="" id="id_real_10" class="form-control realization-input">
+      <input name="real_10" readonly required="" id="id_real_10" class="form-control realization-input hidden-realization">
     </div>
 
     <button id="accept_10" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
