@@ -8,8 +8,10 @@
 {% block scripts %}
   <script>
     let acceptedCounter = 0
+    let feedback_sum = 0
     const numberPattern = /\d+/g
 
+    var finalFeedbackNode = document.getElementById('final-feedback')
     var radioBtns = document.getElementsByClassName('form-check-input')
     Array.from(radioBtns).forEach((el) => {
       const initialIntegerPart = el.name.match(numberPattern)
@@ -26,12 +28,12 @@
     })
 
     var listA_1 = [
-        {title: {{player.realA1_1|json }}, weight: {{player.probA1_1|json }}},
-        {title: {{player.realA2_1|json }}, weight: {{player.probA2_1|json }}},
-        {title: {{player.realA3_1|json }}, weight: {{player.probA3_1|json }}},
-        {title: {{player.realA4_1|json }}, weight: {{player.probA4_1|json }}},
-        {title: {{player.realA5_1|json }}, weight: {{player.probA5_1|json }}}
-      ]
+      {title: {{player.realA1_1|json }}, weight: {{player.probA1_1|json }}},
+      {title: {{player.realA2_1|json }}, weight: {{player.probA2_1|json }}},
+      {title: {{player.realA3_1|json }}, weight: {{player.probA3_1|json }}},
+      {title: {{player.realA4_1|json }}, weight: {{player.probA4_1|json }}},
+      {title: {{player.realA5_1|json }}, weight: {{player.probA5_1|json }}}
+    ]
     var listB_1 = [
       {title: {{player.realB1_1|json }}, weight: {{player.probB1_1|json }}},
       {title: {{player.realB2_1|json }}, weight: {{player.probB2_1|json }}},
@@ -40,12 +42,12 @@
       {title: {{player.realB5_1|json }}, weight: {{player.probB5_1|json }}}
     ]
     var listA_2 = [
-        {title: {{player.realA1_2|json }}, weight: {{player.probA1_2|json }}},
-        {title: {{player.realA2_2|json }}, weight: {{player.probA2_2|json }}},
-        {title: {{player.realA3_2|json }}, weight: {{player.probA3_2|json }}},
-        {title: {{player.realA4_2|json }}, weight: {{player.probA4_2|json }}},
-        {title: {{player.realA5_2|json }}, weight: {{player.probA5_2|json }}}
-      ]
+      {title: {{player.realA1_2|json }}, weight: {{player.probA1_2|json }}},
+      {title: {{player.realA2_2|json }}, weight: {{player.probA2_2|json }}},
+      {title: {{player.realA3_2|json }}, weight: {{player.probA3_2|json }}},
+      {title: {{player.realA4_2|json }}, weight: {{player.probA4_2|json }}},
+      {title: {{player.realA5_2|json }}, weight: {{player.probA5_2|json }}}
+    ]
     var listB_2 = [
       {title: {{player.realB1_2|json }}, weight: {{player.probB1_2|json }}},
       {title: {{player.realB2_2|json }}, weight: {{player.probB2_2|json }}},
@@ -55,12 +57,12 @@
     ]
 
     var listA_3 = [
-        {title: {{player.realA1_3|json }}, weight: {{player.probA1_3|json }}},
-        {title: {{player.realA2_3|json }}, weight: {{player.probA2_3|json }}},
-        {title: {{player.realA3_3|json }}, weight: {{player.probA3_3|json }}},
-        {title: {{player.realA4_3|json }}, weight: {{player.probA4_3|json }}},
-        {title: {{player.realA5_3|json }}, weight: {{player.probA5_3|json }}}
-      ]
+      {title: {{player.realA1_3|json }}, weight: {{player.probA1_3|json }}},
+      {title: {{player.realA2_3|json }}, weight: {{player.probA2_3|json }}},
+      {title: {{player.realA3_3|json }}, weight: {{player.probA3_3|json }}},
+      {title: {{player.realA4_3|json }}, weight: {{player.probA4_3|json }}},
+      {title: {{player.realA5_3|json }}, weight: {{player.probA5_3|json }}}
+    ]
     var listB_3 = [
       {title: {{player.realB1_3|json }}, weight: {{player.probB1_3|json }}},
       {title: {{player.realB2_3|json }}, weight: {{player.probB2_3|json }}},
@@ -70,12 +72,12 @@
     ]
 
     var listA_4 = [
-        {title: {{player.realA1_4|json }}, weight: {{player.probA1_4|json }}},
-        {title: {{player.realA2_4|json }}, weight: {{player.probA2_4|json }}},
-        {title: {{player.realA3_4|json }}, weight: {{player.probA3_4|json }}},
-        {title: {{player.realA4_4|json }}, weight: {{player.probA4_4|json }}},
-        {title: {{player.realA5_4|json }}, weight: {{player.probA5_4|json }}}
-      ]
+      {title: {{player.realA1_4|json }}, weight: {{player.probA1_4|json }}},
+      {title: {{player.realA2_4|json }}, weight: {{player.probA2_4|json }}},
+      {title: {{player.realA3_4|json }}, weight: {{player.probA3_4|json }}},
+      {title: {{player.realA4_4|json }}, weight: {{player.probA4_4|json }}},
+      {title: {{player.realA5_4|json }}, weight: {{player.probA5_4|json }}}
+    ]
     var listB_4 = [
       {title: {{player.realB1_4|json }}, weight: {{player.probB1_4|json }}},
       {title: {{player.realB2_4|json }}, weight: {{player.probB2_4|json }}},
@@ -85,12 +87,12 @@
     ]
 
     var listA_5 = [
-        {title: {{player.realA1_5|json }}, weight: {{player.probA1_5|json }}},
-        {title: {{player.realA2_5|json }}, weight: {{player.probA2_5|json }}},
-        {title: {{player.realA3_5|json }}, weight: {{player.probA3_5|json }}},
-        {title: {{player.realA4_5|json }}, weight: {{player.probA4_5|json }}},
-        {title: {{player.realA5_5|json }}, weight: {{player.probA5_5|json }}}
-      ]
+      {title: {{player.realA1_5|json }}, weight: {{player.probA1_5|json }}},
+      {title: {{player.realA2_5|json }}, weight: {{player.probA2_5|json }}},
+      {title: {{player.realA3_5|json }}, weight: {{player.probA3_5|json }}},
+      {title: {{player.realA4_5|json }}, weight: {{player.probA4_5|json }}},
+      {title: {{player.realA5_5|json }}, weight: {{player.probA5_5|json }}}
+    ]
     var listB_5 = [
       {title: {{player.realB1_5|json }}, weight: {{player.probB1_5|json }}},
       {title: {{player.realB2_5|json }}, weight: {{player.probB2_5|json }}},
@@ -100,12 +102,12 @@
     ]
 
     var listA_6 = [
-        {title: {{player.realA1_6|json }}, weight: {{player.probA1_6|json }}},
-        {title: {{player.realA2_6|json }}, weight: {{player.probA2_6|json }}},
-        {title: {{player.realA3_6|json }}, weight: {{player.probA3_6|json }}},
-        {title: {{player.realA4_6|json }}, weight: {{player.probA4_6|json }}},
-        {title: {{player.realA5_6|json }}, weight: {{player.probA5_6|json }}}
-      ]
+      {title: {{player.realA1_6|json }}, weight: {{player.probA1_6|json }}},
+      {title: {{player.realA2_6|json }}, weight: {{player.probA2_6|json }}},
+      {title: {{player.realA3_6|json }}, weight: {{player.probA3_6|json }}},
+      {title: {{player.realA4_6|json }}, weight: {{player.probA4_6|json }}},
+      {title: {{player.realA5_6|json }}, weight: {{player.probA5_6|json }}}
+    ]
     var listB_6 = [
       {title: {{player.realB1_6|json }}, weight: {{player.probB1_6|json }}},
       {title: {{player.realB2_6|json }}, weight: {{player.probB2_6|json }}},
@@ -114,12 +116,12 @@
       {title: {{player.realB5_6|json }}, weight: {{player.probB5_6|json }}}
     ]
     var listA_7 = [
-        {title: {{player.realA1_7|json }}, weight: {{player.probA1_7|json }}},
-        {title: {{player.realA2_7|json }}, weight: {{player.probA2_7|json }}},
-        {title: {{player.realA3_7|json }}, weight: {{player.probA3_7|json }}},
-        {title: {{player.realA4_7|json }}, weight: {{player.probA4_7|json }}},
-        {title: {{player.realA5_7|json }}, weight: {{player.probA5_7|json }}}
-      ]
+      {title: {{player.realA1_7|json }}, weight: {{player.probA1_7|json }}},
+      {title: {{player.realA2_7|json }}, weight: {{player.probA2_7|json }}},
+      {title: {{player.realA3_7|json }}, weight: {{player.probA3_7|json }}},
+      {title: {{player.realA4_7|json }}, weight: {{player.probA4_7|json }}},
+      {title: {{player.realA5_7|json }}, weight: {{player.probA5_7|json }}}
+    ]
     var listB_7 = [
       {title: {{player.realB1_7|json }}, weight: {{player.probB1_7|json }}},
       {title: {{player.realB2_7|json }}, weight: {{player.probB2_7|json }}},
@@ -129,12 +131,12 @@
     ]
 
     var listA_8 = [
-        {title: {{player.realA1_8|json }}, weight: {{player.probA1_8|json }}},
-        {title: {{player.realA2_8|json }}, weight: {{player.probA2_8|json }}},
-        {title: {{player.realA3_8|json }}, weight: {{player.probA3_8|json }}},
-        {title: {{player.realA4_8|json }}, weight: {{player.probA4_8|json }}},
-        {title: {{player.realA5_8|json }}, weight: {{player.probA5_8|json }}}
-      ]
+      {title: {{player.realA1_8|json }}, weight: {{player.probA1_8|json }}},
+      {title: {{player.realA2_8|json }}, weight: {{player.probA2_8|json }}},
+      {title: {{player.realA3_8|json }}, weight: {{player.probA3_8|json }}},
+      {title: {{player.realA4_8|json }}, weight: {{player.probA4_8|json }}},
+      {title: {{player.realA5_8|json }}, weight: {{player.probA5_8|json }}}
+    ]
     var listB_8 = [
       {title: {{player.realB1_8|json }}, weight: {{player.probB1_8|json }}},
       {title: {{player.realB2_8|json }}, weight: {{player.probB2_8|json }}},
@@ -144,12 +146,12 @@
     ]
 
     var listA_9 = [
-        {title: {{player.realA1_9|json }}, weight: {{player.probA1_9|json }}},
-        {title: {{player.realA2_9|json }}, weight: {{player.probA2_9|json }}},
-        {title: {{player.realA3_9|json }}, weight: {{player.probA3_9|json }}},
-        {title: {{player.realA4_9|json }}, weight: {{player.probA4_9|json }}},
-        {title: {{player.realA5_9|json }}, weight: {{player.probA5_9|json }}}
-      ]
+      {title: {{player.realA1_9|json }}, weight: {{player.probA1_9|json }}},
+      {title: {{player.realA2_9|json }}, weight: {{player.probA2_9|json }}},
+      {title: {{player.realA3_9|json }}, weight: {{player.probA3_9|json }}},
+      {title: {{player.realA4_9|json }}, weight: {{player.probA4_9|json }}},
+      {title: {{player.realA5_9|json }}, weight: {{player.probA5_9|json }}}
+    ]
     var listB_9 = [
       {title: {{player.realB1_9|json }}, weight: {{player.probB1_9|json }}},
       {title: {{player.realB2_9|json }}, weight: {{player.probB2_9|json }}},
@@ -159,12 +161,12 @@
     ]
 
     var listA_10 = [
-        {title: {{player.realA1_10|json }}, weight: {{player.probA1_10|json }}},
-        {title: {{player.realA2_10|json }}, weight: {{player.probA2_10|json }}},
-        {title: {{player.realA3_10|json }}, weight: {{player.probA3_10|json }}},
-        {title: {{player.realA4_10|json }}, weight: {{player.probA4_10|json }}},
-        {title: {{player.realA5_10|json }}, weight: {{player.probA5_10|json }}}
-      ]
+      {title: {{player.realA1_10|json }}, weight: {{player.probA1_10|json }}},
+      {title: {{player.realA2_10|json }}, weight: {{player.probA2_10|json }}},
+      {title: {{player.realA3_10|json }}, weight: {{player.probA3_10|json }}},
+      {title: {{player.realA4_10|json }}, weight: {{player.probA4_10|json }}},
+      {title: {{player.realA5_10|json }}, weight: {{player.probA5_10|json }}}
+    ]
     var listB_10 = [
       {title: {{player.realB1_10|json }}, weight: {{player.probB1_10|json }}},
       {title: {{player.realB2_10|json }}, weight: {{player.probB2_10|json }}},
@@ -188,9 +190,6 @@
     function acceptChoice(event) {
       const integerPart = event.target.id.match(numberPattern)
       const radioButtons = document.getElementsByName('submitted_answer_' + integerPart)
-      const realizationField = document.getElementById('id_real_' + integerPart)
-      const realizationWrapper  = document.getElementById('real_' + integerPart)
-      const realizationText  = document.getElementById('real-text_' + integerPart)
 
       if (!radioButtons[0].checked && !radioButtons[1].checked) {
         alert('Make choice in task ' + integerPart + ' / 10')
@@ -204,16 +203,12 @@
         }
       })
 
+      let realization
       if (choiceValue === 'A') {
-        realizationField.value = pick(lists_A[integerPart - 1]).title
+        realization = pick(lists_A[integerPart - 1]).title
       } else {
-        realizationField.value = pick(lists_B[integerPart - 1]).title
+        realization = pick(lists_B[integerPart - 1]).title
       }
-
-      if ({{ Constants.show_feedback|json }}) {
-          realizationText.innerHTML = 'Your choice was <b>' + choiceValue + '</b> and the realization was '
-          realizationWrapper.classList.remove('hidden-realization')
-        }
 
       event.target.disabled = true
       event.target.nextElementSibling.disabled = true
@@ -225,8 +220,10 @@
         })
       })
 
+      feedback_sum = feedback_sum + Number(realization)
       acceptedCounter = acceptedCounter + 1
       if (acceptedCounter === 10) {
+        finalFeedbackNode.innerHTML = 'The sum of all 10 realizations was <b>' + feedback_sum.toString() + '<b>'
         next.disabled = false
       }
     }
@@ -299,11 +296,6 @@
       <input name="actions_seq_1" required="" id="id_actions_seq_1" class="form-control">
     </div>
 
-    <div id="real_1" class="controls field-real_1 hidden-realization">
-      <span id="real-text_1"></span>
-      <input name="real_1" readonly required="" id="id_real_1" class="form-control realization-input">
-    </div>
-
     <button id="accept_1" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -362,11 +354,6 @@
 
     <div id="actions-seq_2" class="controls field-actions_seq_2 hidden-seq-data">
       <input name="actions_seq_2" required="" id="id_actions_seq_2" class="form-control">
-    </div>
-
-    <div id="real_2" class="controls field-real_2 hidden-realization">
-      <span id="real-text_2"></span>
-      <input name="real_2" readonly required="" id="id_real_2" class="form-control realization-input">
     </div>
 
     <button id="accept_2" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -428,11 +415,6 @@
       <input name="actions_seq_3" required="" id="id_actions_seq_3" class="form-control">
     </div>
 
-    <div id="real_3" class="controls field-real_3 hidden-realization">
-      <span id="real-text_3"></span>
-      <input name="real_3" readonly required="" id="id_real_3" class="form-control realization-input">
-    </div>
-
     <button id="accept_3" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -490,11 +472,6 @@
 
     <div id="actions-seq_4" class="controls field-actions_seq_4 hidden-seq-data">
       <input name="actions_seq_4" required="" id="id_actions_seq_4" class="form-control">
-    </div>
-
-    <div id="real_4" class="controls field-real_4 hidden-realization">
-      <span id="real-text_4"></span>
-      <input name="real_4" readonly required="" id="id_real_4" class="form-control realization-input">
     </div>
 
     <button id="accept_4" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -556,11 +533,6 @@
       <input name="actions_seq_5" required="" id="id_actions_seq_5" class="form-control">
     </div>
 
-    <div id="real_5" class="controls field-real_5 hidden-realization">
-      <span id="real-text_5"></span>
-      <input name="real_5" readonly required="" id="id_real_5" class="form-control realization-input">
-    </div>
-
     <button id="accept_5" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -618,11 +590,6 @@
 
     <div id="actions-seq_6" class="controls field-actions_seq_6 hidden-seq-data">
       <input name="actions_seq_6" required="" id="id_actions_seq_6" class="form-control">
-    </div>
-
-    <div id="real_6" class="controls field-real_6 hidden-realization">
-      <span id="real-text_6"></span>
-      <input name="real_6" readonly required="" id="id_real_6" class="form-control realization-input">
     </div>
 
     <button id="accept_6" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -685,11 +652,6 @@
       <input name="actions_seq_7" required="" id="id_actions_seq_7" class="form-control">
     </div>
 
-    <div id="real_7" class="controls field-real_7 hidden-realization">
-      <span id="real-text_7"></span>
-      <input name="real_7" readonly required="" id="id_real_7" class="form-control realization-input">
-    </div>
-
     <button id="accept_7" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -747,11 +709,6 @@
 
     <div id="actions-seq_8" class="controls field-actions_seq_8 hidden-seq-data">
       <input name="actions_seq_8" required="" id="id_actions_seq_8" class="form-control">
-    </div>
-
-    <div id="real_8" class="controls field-real_8 hidden-realization">
-      <span id="real-text_8"></span>
-      <input name="real_8" readonly required="" id="id_real_8" class="form-control realization-input">
     </div>
 
     <button id="accept_8" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
@@ -813,11 +770,6 @@
       <input name="actions_seq_9" required="" id="id_actions_seq_9" class="form-control">
     </div>
 
-    <div id="real_9" class="controls field-real_9 hidden-realization">
-      <span id="real-text_9"></span>
-      <input name="real_9" readonly required="" id="id_real_9" class="form-control realization-input">
-    </div>
-
     <button id="accept_9" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -877,11 +829,6 @@
       <input name="actions_seq_10" required="" id="id_actions_seq_10" class="form-control">
     </div>
 
-    <div id="real_10" class="controls field-real_10 hidden-realization">
-      <span id="real-text_10"></span>
-      <input name="real_10" readonly required="" id="id_real_10" class="form-control realization-input">
-    </div>
-
     <button id="accept_10" type="button" class="primary-btn btn-accept" onclick="acceptChoice(event)">
       Accept
     </button>
@@ -890,5 +837,6 @@
     </button>
   </div>
 
+  <div id="final-feedback" class="final-feedback"></div>
   <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
 {% endblock %}
