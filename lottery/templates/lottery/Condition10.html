@@ -223,7 +223,9 @@
       feedback_sum = feedback_sum + Number(realization)
       acceptedCounter = acceptedCounter + 1
       if (acceptedCounter === 10) {
-        finalFeedbackNode.innerHTML = 'The sum of all 10 realizations was <b>' + feedback_sum.toString() + '<b>'
+        if ({{ Constants.show_feedback|json }}) {
+          finalFeedbackNode.innerHTML = 'The sum of all 10 realizations was <b>' + feedback_sum.toString() + '<b>'
+        }
         next.disabled = false
       }
     }
