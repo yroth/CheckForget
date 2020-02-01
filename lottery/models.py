@@ -23,8 +23,15 @@ class Constants(BaseConstants):
         temp_arr_1 = [i for i in range(1, int(total_rows / 2) + 1)]
         temp_arr_10 = [i for i in range(int(total_rows / 2) + 1, total_rows + 1)]
 
+    # payments info
     check_cost = 5
-   
+    base_payment = 0
+    # payment_structure should be one of {1, 2, 3}
+    # 1: one randomly selected trial + base_payment
+    # 2: accumulated points are chance for a 1$ bonus
+    # 3: accumulated cents + base_payment
+    payment_structure = 2
+
     # initial choice could be 'A' or 'B'
     # to disable static initial choice, set it to empty string
     initial_choice = ''
@@ -55,6 +62,7 @@ class Subsession(BaseSubsession):
                 paying_round = random.randint(1, Constants.rows_per_condition) if p.vars['ind_cond_1_first'] \
                 else random.randint(num_cond_10_rounds + 1, num_cond_10_rounds + Constants.rows_per_condition)
                 p.vars['paying_round'] = paying_round
+                p.vars['is_exp_counter'] = 0
 
         for p in self.session.get_participants():
             if p.vars['ind_cond_1_first']:
@@ -122,6 +130,9 @@ class Subsession(BaseSubsession):
                     player.probA3, player.realA3, player.probA4, player.realA4, player.probA5, player.realA5)
                 player.ev_b = self.ev(player.probB1, player.realB1, player.probB2, player.realB2,\
                     player.probB3, player.realB3, player.probB4, player.realB4, player.probB5, player.realB5)
+
+                # for payment_structure == 2
+                player.most_expected = 'A' if player.ev_a > player.ev_b else 'B'
 
                 if (Constants.initial_ev_choice == 'higher'):
                     player.initial_choice_ev = 'A' if player.ev_a > player.ev_b else 'B'
@@ -462,6 +473,18 @@ class Subsession(BaseSubsession):
                 player.ev_b_10 = self.ev(player.probB1_10, player.realB1_10, player.probB2_10, player.realB2_10, \
                     player.probB3_10, player.realB3_10, player.probB4_10, player.realB4_10, player.probB5_10, player.realB5_10)
 
+                # for payment_structure == 2
+                player.most_expected_1 = 'A' if player.ev_a_1 > player.ev_b_1 else 'B'
+                player.most_expected_2 = 'A' if player.ev_a_2 > player.ev_b_2 else 'B'
+                player.most_expected_3 = 'A' if player.ev_a_3 > player.ev_b_3 else 'B'
+                player.most_expected_4 = 'A' if player.ev_a_4 > player.ev_b_4 else 'B'
+                player.most_expected_5 = 'A' if player.ev_a_5 > player.ev_b_5 else 'B'
+                player.most_expected_6 = 'A' if player.ev_a_6 > player.ev_b_6 else 'B'
+                player.most_expected_7 = 'A' if player.ev_a_7 > player.ev_b_7 else 'B'
+                player.most_expected_8 = 'A' if player.ev_a_8 > player.ev_b_8 else 'B'
+                player.most_expected_9 = 'A' if player.ev_a_9 > player.ev_b_9 else 'B'
+                player.most_expected_10 = 'A' if player.ev_a_10 > player.ev_b_10 else 'B'
+
                 if (Constants.initial_ev_choice == 'higher'):
                     player.initial_choice_ev_1 = 'A' if player.ev_a_1 > player.ev_b_1 else 'B'
                     player.initial_choice_ev_2 = 'A' if player.ev_a_2 > player.ev_b_2 else 'B'
@@ -540,13 +563,22 @@ class Player(BasePlayer):
     ev_a = models.FloatField()
     ev_b = models.FloatField()
     initial_choice_ev = models.StringField()
+    most_expected = models.StringField()
+    is_exp = models.BooleanField()
 
-    def get_payoff(self, paying_round):
-        selected_player = self.in_round(paying_round)
-        if selected_player.checked:
-            self.payoff = c(selected_player.real - Constants.check_cost)
-        else: 
-            self.payoff = c(selected_player.real)
+    def get_payoff(self, paying_round, is_exp_counter):
+        if Constants.payment_structure == 1:
+            selected_player = self.in_round(paying_round)
+            if selected_player.checked:
+                self.payoff = c(Constants.base_payment + selected_player.real - Constants.check_cost)
+            else: 
+                self.payoff = c(Constants.base_payment + selected_player.real)
+        if Constants.payment_structure == 2:
+            prob = is_exp_counter / Constants.total_rows
+            bonus = np.random.choice([100, 0], 1, p=[prob, 1 - prob])[0]
+            self.payoff = c(Constants.base_payment + int(bonus))
+        if Constants.payment_structure == 3:
+            pass
 
     ev_a_1 = models.FloatField()
     ev_a_2 = models.FloatField()
@@ -580,6 +612,17 @@ class Player(BasePlayer):
     initial_choice_ev_8 = models.StringField()
     initial_choice_ev_9 = models.StringField()
     initial_choice_ev_10 = models.StringField()
+
+    most_expected_1 = models.StringField()
+    most_expected_2 = models.StringField()
+    most_expected_3 = models.StringField()
+    most_expected_4 = models.StringField()
+    most_expected_5 = models.StringField()
+    most_expected_6 = models.StringField()
+    most_expected_7 = models.StringField()
+    most_expected_8 = models.StringField()
+    most_expected_9 = models.StringField()
+    most_expected_10 = models.StringField()
 
     submitted_answer_1 = make_field()
     submitted_answer_2 = make_field()

@@ -8,11 +8,12 @@
   <p>In this trial you choose “{{ choice }}”</p>
   <p>The trial realization was: {{ real }}.</p>
   <p>The conversion rate is 100 points = 1$.</p>
+  <p>The base payment is: {{ Constants.base_payment }}</p>
   {% if checked %}
     <p>The check cost was: {{ Constants.check_cost }}</p>
-    <p>The trial payoff was: {{ player.payoff }}</p>
+    <p>The final payoff is: {{ player.payoff }}</p>
   {% else %}
-    <p>The trial payoff was: {{ player.payoff }}</p>
+    <p>The final payoff is: {{ player.payoff }}</p>
   {% endif %}
   {% next_button %}
 
