@@ -30,7 +30,7 @@ class Constants(BaseConstants):
     # 1: one randomly selected trial + base_payment
     # 2: accumulated points are chance for a 1$ bonus
     # 3: accumulated cents + base_payment
-    payment_structure = 2
+    payment_structure = 3
 
     # initial choice could be 'A' or 'B'
     # to disable static initial choice, set it to empty string
@@ -61,8 +61,12 @@ class Subsession(BaseSubsession):
 
                 paying_round = random.randint(1, Constants.rows_per_condition) if p.vars['ind_cond_1_first'] \
                 else random.randint(num_cond_10_rounds + 1, num_cond_10_rounds + Constants.rows_per_condition)
+                # for payment_structure == 1
                 p.vars['paying_round'] = paying_round
+                # for payment_structure == 2
                 p.vars['is_exp_counter'] = 0
+                # for payment_structure == 3
+                p.vars['sum_real'] = 0
 
         for p in self.session.get_participants():
             if p.vars['ind_cond_1_first']:
@@ -565,8 +569,9 @@ class Player(BasePlayer):
     initial_choice_ev = models.StringField()
     most_expected = models.StringField()
     is_exp = models.BooleanField()
+    real_sum_10 = models.IntegerField()
 
-    def get_payoff(self, paying_round, is_exp_counter):
+    def get_payoff(self, paying_round, is_exp_counter, sum_real):
         if Constants.payment_structure == 1:
             selected_player = self.in_round(paying_round)
             if selected_player.checked:
@@ -578,7 +583,7 @@ class Player(BasePlayer):
             bonus = np.random.choice([100, 0], 1, p=[prob, 1 - prob])[0]
             self.payoff = c(Constants.base_payment + int(bonus))
         if Constants.payment_structure == 3:
-            pass
+            self.payoff = c(Constants.base_payment + sum_real)
 
     ev_a_1 = models.FloatField()
     ev_a_2 = models.FloatField()

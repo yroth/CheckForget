@@ -12,6 +12,7 @@
     const numberPattern = /\d+/g
 
     var finalFeedbackNode = document.getElementById('final-feedback')
+    var realSumNode = document.getElementById('real_sum_10')
     var radioBtns = document.getElementsByClassName('form-check-input')
     Array.from(radioBtns).forEach((el) => {
       const initialIntegerPart = el.name.match(numberPattern)
@@ -223,6 +224,7 @@
       feedback_sum = feedback_sum + Number(realization)
       acceptedCounter = acceptedCounter + 1
       if (acceptedCounter === 10) {
+        realSumNode.value = feedback_sum
         if ({{ Constants.show_feedback|json }}) {
           finalFeedbackNode.innerHTML = 'The sum of all 10 realizations was <b>' + feedback_sum.toString() + '<b>'
         }
@@ -840,5 +842,6 @@
   </div>
 
   <div id="final-feedback" class="final-feedback"></div>
+  <input id="real_sum_10" name="real_sum_10" required="" style="display: none;" class="form-control"/>
   <button id="next" class="otree-btn-next btn btn-primary" disabled>Next</button>
 {% endblock %}

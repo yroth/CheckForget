@@ -34,6 +34,7 @@ class Condition1(Page):
     self.player.is_exp = self.player.most_expected == self.player.choice
     if self.player.is_exp:
       self.participant.vars['is_exp_counter'] = self.participant.vars['is_exp_counter'] + 1
+    self.participant.vars['sum_real'] = self.participant.vars['sum_real'] + self.player.real
 
 
 class Condition10(Page):
@@ -43,7 +44,8 @@ class Condition10(Page):
                   'submitted_answer_7', 'submitted_answer_8', 'submitted_answer_9', 'submitted_answer_10',\
                   'actions_seq_1', 'actions_seq_2', 'actions_seq_3',\
                   'actions_seq_4', 'actions_seq_5', 'actions_seq_6',\
-                  'actions_seq_7', 'actions_seq_8', 'actions_seq_9', 'actions_seq_10']
+                  'actions_seq_7', 'actions_seq_8', 'actions_seq_9', 'actions_seq_10',\
+                  'real_sum_10']
   
   def is_displayed(self):
     return self.participant.vars['ind_cond_1_first'] and (self.round_number > Constants.rows_per_condition) or \
@@ -81,6 +83,8 @@ class Condition10(Page):
 
     self.participant.vars['is_exp_counter'] = self.participant.vars['is_exp_counter'] + temp_counter
 
+    self.participant.vars['sum_real'] = self.participant.vars['sum_real'] + self.player.real_sum_10
+
 
 class BetweenConditions(Page):
   def is_displayed(self):
@@ -96,7 +100,9 @@ class ShortQuestionnaire(Page):
     return self.round_number == Constants.num_rounds
   
   def before_next_page(self):
-    self.player.get_payoff(self.participant.vars['paying_round'], self.participant.vars['is_exp_counter'])
+    self.player.get_payoff(\
+      self.participant.vars['paying_round'], self.participant.vars['is_exp_counter'], self.participant.vars['sum_real']\
+    )
 
 
 class EndGamePaymStruct1(Page):
@@ -129,6 +135,10 @@ class EndGamePaymStruct2(Page):
 class EndGamePaymStruct3(Page):
   def is_displayed(self):
     return self.round_number == Constants.num_rounds and Constants.payment_structure == 3
+
+  def vars_for_template(self):
+    sum_real = self.participant.vars['sum_real']
+    return dict(sum_real = sum_real)
 
 page_sequence = [
   Initial,
